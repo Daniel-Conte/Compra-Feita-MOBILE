@@ -1,16 +1,17 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ["babel-preset-expo"],
+    presets: ['babel-preset-expo'],
     plugins: [
       [
-        "module-resolver",
+        'module-resolver',
         {
           alias: {
-            "@components": "./src/components",
-            "@screens": "./src/screens",
-            "@hooks": "./src/hooks",
-            "@typings": "./src/types",
+            '@components': './src/components',
+            '@screens': './src/screens',
+            '@hooks': './src/hooks',
+            '@config': './src/config',
+            '@typings': './src/types',
           },
         },
       ],
