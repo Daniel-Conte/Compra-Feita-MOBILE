@@ -1,4 +1,5 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
 import EditScreenInfo from '@components/EditScreenInfo';
 import { RootTabScreenProps } from '@typings/navigation';
@@ -9,6 +10,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       <Text style={styles.title}>Tab One</Text>
       <View style={styles.separator} />
       <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+
+      <Button mode="contained" onPress={() => {}} icon="camera">
+        Button
+      </Button>
     </View>
   );
 }
