@@ -11,7 +11,7 @@ module.exports = function (api) {
             '@screens': './src/screens',
             '@hooks': './src/hooks',
             '@config': './src/config',
-            '@typings': './src/types',
+            '@navigation': './src/navigation',
           },
         },
       ],
