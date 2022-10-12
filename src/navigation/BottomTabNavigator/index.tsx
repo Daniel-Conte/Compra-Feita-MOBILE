@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { FontAwesome } from '@expo/vector-icons';
 
-import TabOneScreen from '@screens/TabOneScreen';
+import ProdutosNavigator from './ProdutosNavigator';
 import TabTwoScreen from '@screens/TabTwoScreen';
 import { RootTabParamList, RootTabScreenProps } from '../types';
 
@@ -11,16 +11,16 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 const BottomTabNavigator = () => {
   return (
-    <BottomTab.Navigator initialRouteName="TabOne">
+    <BottomTab.Navigator initialRouteName="Produtos">
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+        name="Produtos"
+        component={ProdutosNavigator}
+        options={({ navigation }: RootTabScreenProps<'Produtos'>) => ({
+          title: 'Produtos',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => navigation.navigate('NotFound')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
