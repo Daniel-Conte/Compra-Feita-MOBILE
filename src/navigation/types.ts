@@ -23,6 +23,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
   Produtos: NavigatorScreenParams<ProdutosStackParamList> | undefined;
   Carrinho: NavigatorScreenParams<CarrinhoStackParamList> | undefined;
+  Perfil: NavigatorScreenParams<PerfilStackParamList> | undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
@@ -51,4 +52,15 @@ export type CarrinhoStackScreenProps<Screen extends keyof CarrinhoStackParamList
   CompositeScreenProps<
     NativeStackScreenProps<CarrinhoStackParamList, Screen>,
     RootTabScreenProps<'Carrinho'>
+  >;
+
+// Perfil
+export type PerfilStackParamList = {
+  PerfilPage: undefined;
+};
+
+export type PerfilStackScreenProps<Screen extends keyof PerfilStackParamList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<PerfilStackParamList, Screen>,
+    RootTabScreenProps<'Perfil'>
   >;

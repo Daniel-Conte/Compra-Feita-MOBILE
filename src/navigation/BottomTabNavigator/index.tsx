@@ -5,6 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import ProdutosNavigator from './ProdutosNavigator';
 import CarrinhoNavigator from './CarrinhoNavigator';
+import PerfilNavigator from './PerfilNavigator';
 import { RootTabParamList, RootTabScreenProps } from '../types';
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -35,6 +36,15 @@ const BottomTabNavigator = () => {
         component={CarrinhoNavigator}
         options={{
           title: 'Carrinho',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Perfil"
+        component={PerfilNavigator}
+        options={{
+          title: 'Perfil',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
