@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 
 import ProdutosNavigator from './ProdutosNavigator';
-import TabTwoScreen from '@screens/TabTwoScreen';
+import CarrinhoNavigator from './CarrinhoNavigator';
 import { RootTabParamList, RootTabScreenProps } from '../types';
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -29,11 +29,12 @@ const BottomTabNavigator = () => {
           ),
         })}
       />
+
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Carrinho"
+        component={CarrinhoNavigator}
         options={{
-          title: 'Tab Two',
+          title: 'Carrinho',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
