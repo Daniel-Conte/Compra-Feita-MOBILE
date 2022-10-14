@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 
 import ProdutosNavigator from './ProdutosNavigator';
+import PedidosNavigator from './PedidosNavigator';
 import CarrinhoNavigator from './CarrinhoNavigator';
 import PerfilNavigator from './PerfilNavigator';
 import { RootTabParamList, RootTabScreenProps } from '../types';
@@ -29,6 +30,15 @@ const BottomTabNavigator = () => {
             </Pressable>
           ),
         })}
+      />
+
+      <BottomTab.Screen
+        name="Pedidos"
+        component={PedidosNavigator}
+        options={{
+          title: 'Pedidos',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
       />
 
       <BottomTab.Screen

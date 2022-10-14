@@ -22,6 +22,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 // Root Tab
 export type RootTabParamList = {
   Produtos: NavigatorScreenParams<ProdutosStackParamList> | undefined;
+  Pedidos: NavigatorScreenParams<PedidosStackParamList> | undefined;
   Carrinho: NavigatorScreenParams<CarrinhoStackParamList> | undefined;
   Perfil: NavigatorScreenParams<PerfilStackParamList> | undefined;
 };
@@ -41,6 +42,18 @@ export type ProdutosStackScreenProps<Screen extends keyof ProdutosStackParamList
   CompositeScreenProps<
     NativeStackScreenProps<ProdutosStackParamList, Screen>,
     RootTabScreenProps<'Produtos'>
+  >;
+
+// Pedidos
+export type PedidosStackParamList = {
+  PedidosList: undefined;
+  PedidoCreate: { idProdutos: number[] };
+};
+
+export type PedidosStackScreenProps<Screen extends keyof PedidosStackParamList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<PedidosStackParamList, Screen>,
+    RootTabScreenProps<'Pedidos'>
   >;
 
 // Carrinho de compras
