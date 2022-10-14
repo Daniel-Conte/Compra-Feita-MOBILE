@@ -1,5 +1,6 @@
 import { Pressable } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { LabelPosition } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -7,6 +8,7 @@ import ProdutosNavigator from './ProdutosNavigator';
 import PedidosNavigator from './PedidosNavigator';
 import CarrinhoNavigator from './CarrinhoNavigator';
 import PerfilNavigator from './PerfilNavigator';
+import TabBar from '@components/TabBar';
 import { RootTabParamList, RootTabScreenProps } from '../types';
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
@@ -18,8 +20,8 @@ const BottomTabNavigator = () => {
         name="Produtos"
         component={ProdutosNavigator}
         options={({ navigation }: RootTabScreenProps<'Produtos'>) => ({
-          title: 'Produtos',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: getTabBarLabel('Produtos'),
+          tabBarIcon: getTabBarIcon('cubes'),
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('NotFound')}
@@ -36,8 +38,8 @@ const BottomTabNavigator = () => {
         name="Pedidos"
         component={PedidosNavigator}
         options={{
-          title: 'Pedidos',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: getTabBarLabel('Pedidos'),
+          tabBarIcon: getTabBarIcon('list-alt'),
         }}
       />
 
@@ -45,8 +47,8 @@ const BottomTabNavigator = () => {
         name="Carrinho"
         component={CarrinhoNavigator}
         options={{
-          title: 'Carrinho',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: getTabBarLabel('Carrinho'),
+          tabBarIcon: getTabBarIcon('shopping-cart'),
         }}
       />
 
@@ -54,19 +56,28 @@ const BottomTabNavigator = () => {
         name="Perfil"
         component={PerfilNavigator}
         options={{
-          title: 'Perfil',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: getTabBarLabel('Perfil'),
+          tabBarIcon: getTabBarIcon('user'),
         }}
       />
     </BottomTab.Navigator>
   );
 };
 
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
-}
+const getTabBarLabel = (label: string) => {
+  type TabBarLabelParams = { focused: boolean; color: string; position: LabelPosition };
+
+  return ({ color, focused }: TabBarLabelParams) => (
+    <TabBar.Label text={label} color={color} focused={focused} />
+  );
+};
+
+const getTabBarIcon = (icon: React.ComponentProps<typeof FontAwesome>['name']) => {
+  type TabBarIconParams = { focused: boolean; color: string; size: number };
+
+  return ({ color, focused }: TabBarIconParams) => (
+    <TabBar.Icon name={icon} color={color} focused={focused} />
+  );
+};
 
 export default BottomTabNavigator;
