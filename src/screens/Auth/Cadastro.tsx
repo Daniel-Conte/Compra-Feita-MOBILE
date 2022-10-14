@@ -1,15 +1,15 @@
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
-import { PedidosStackScreenProps } from '@navigation/types';
+import { AuthStackScreenProps } from '@navigation/types';
 
-const PedidosList = ({ navigation }: PedidosStackScreenProps<'PedidosList'>) => {
+const Cadastro = ({ navigation }: AuthStackScreenProps<'Cadastro'>) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Listagem de pedidos</Text>
+      <Text style={styles.title}>Cadastro</Text>
 
-      <Button mode="contained" onPress={() => navigation.navigate('Auth')} icon="camera">
-        Fazer login
+      <Button mode="contained" onPress={() => navigation.goBack()} icon="camera">
+        Go back
       </Button>
     </View>
   );
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PedidosList;
+export default Cadastro;
