@@ -1,6 +1,9 @@
 import { Pressable } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { LabelPosition } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
+import {
+  BottomTabBarButtonProps,
+  LabelPosition,
+} from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -22,6 +25,7 @@ const BottomTabNavigator = () => {
         options={({ navigation }: RootTabScreenProps<'Produtos'>) => ({
           tabBarLabel: getTabBarLabel('Produtos'),
           tabBarIcon: getTabBarIcon('cubes'),
+          tabBarButton: getTabBarButton,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('NotFound')}
@@ -40,6 +44,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: getTabBarLabel('Pedidos'),
           tabBarIcon: getTabBarIcon('list-alt'),
+          tabBarButton: getTabBarButton,
         }}
       />
 
@@ -49,6 +54,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: getTabBarLabel('Carrinho'),
           tabBarIcon: getTabBarIcon('shopping-cart'),
+          tabBarButton: getTabBarButton,
         }}
       />
 
@@ -58,6 +64,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: getTabBarLabel('Perfil'),
           tabBarIcon: getTabBarIcon('user'),
+          tabBarButton: getTabBarButton,
         }}
       />
     </BottomTab.Navigator>
@@ -79,5 +86,7 @@ const getTabBarIcon = (icon: React.ComponentProps<typeof FontAwesome>['name']) =
     <TabBar.Icon name={icon} color={color} focused={focused} />
   );
 };
+
+const getTabBarButton = (props: BottomTabBarButtonProps) => <TabBar.Button {...props} />;
 
 export default BottomTabNavigator;
