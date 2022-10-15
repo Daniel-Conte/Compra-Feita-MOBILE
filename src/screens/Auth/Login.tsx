@@ -1,24 +1,60 @@
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
-import { AuthStackScreenProps } from '@navigation/types';
+import HideKeyboardOnTouchOutside from '@components/HideKeyboardOnTouchOutside';
+import Form from '@components/Form';
+import Field from '@components/Field';
+import { required } from '@components/Form/rules';
+import type { AuthStackScreenProps } from '@navigation/types';
+
+type LoginFormValues = {
+  email: string;
+  senha: string;
+};
 
 const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+  const onSubmit = (data: LoginFormValues) => {
+    console.log(data);
+  };
 
-      <Button mode="contained" onPress={() => navigation.push('Cadastro')} icon="camera">
-        Cadastrar-se
-      </Button>
-    </View>
+  return (
+    <HideKeyboardOnTouchOutside>
+      <View style={styles.container}>
+        <Text style={styles.title}>Login</Text>
+
+        <Form onSubmit={onSubmit}>
+          {({ submitForm }) => {
+            return (
+              <>
+                <Field
+                  name="email"
+                  label="Email"
+                  mode="outlined"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  rules={{ required }}
+                />
+                <Field name="senha" label="Senha" mode="outlined" secureTextEntry />
+
+                <Button mode="outlined" onPress={submitForm()}>
+                  Submit
+                </Button>
+              </>
+            );
+          }}
+        </Form>
+
+        <Button mode="contained" onPress={() => navigation.push('Cadastro')} icon="camera">
+          Cadastrar-se
+        </Button>
+      </View>
+    </HideKeyboardOnTouchOutside>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f6f6f6',
   },
