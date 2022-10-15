@@ -1,4 +1,4 @@
-import { Theme, DefaultTheme, DarkTheme } from 'react-native-paper';
+import { Theme, DefaultTheme, DarkTheme, Colors } from 'react-native-paper';
 
 export default {
   light: {
@@ -9,6 +9,7 @@ export default {
       primary: '#1970E6',
       accent: '#E6A019',
       text: '#06102a',
+      error: Colors.red700,
     },
   },
   dark: { ...DarkTheme },
