@@ -1,28 +1,23 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
 import HideKeyboardOnTouchOutside from '@components/HideKeyboardOnTouchOutside';
 import Form from '@components/Form';
 import Field from '@components/Field';
-import { required } from '@components/Form/rules';
-import type { AuthStackScreenProps } from '@navigation/types';
+import useLogin from './useLogin';
+import loginSchema from './schema';
+import loginStyles from './styles';
+import type { LoginProps } from './types';
 
-type LoginFormValues = {
-  email: string;
-  senha: string;
-};
-
-const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
-  const onSubmit = (data: LoginFormValues) => {
-    console.log(data);
-  };
+const Login = ({ navigation }: LoginProps) => {
+  const { onSubmit } = useLogin();
 
   return (
     <HideKeyboardOnTouchOutside>
-      <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
+      <View style={loginStyles.container}>
+        <Text style={loginStyles.title}>Login</Text>
 
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} validationSchema={loginSchema}>
           {({ submitForm }) => {
             return (
               <>
@@ -32,7 +27,6 @@ const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
                   mode="outlined"
                   keyboardType="email-address"
                   autoCapitalize="none"
-                  rules={{ required }}
                 />
                 <Field name="senha" label="Senha" mode="outlined" secureTextEntry />
 
@@ -51,17 +45,5 @@ const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
     </HideKeyboardOnTouchOutside>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#f6f6f6',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
 
 export default Login;
