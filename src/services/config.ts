@@ -13,4 +13,15 @@ const instance = axios.create({
     return config
 }, undefined, {synchronous: true }) */
 
+instance.interceptors.response.use(
+  resp => {
+    if (resp.data?.data) resp.data = resp.data.data;
+    else if (resp.data?.message) resp.data = resp.data.message;
+
+    return resp;
+  },
+  undefined,
+  { synchronous: true },
+);
+
 export default instance;
