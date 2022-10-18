@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Avatar, Button, Headline, Text, TextInput } from 'react-native-paper';
 
 import HideKeyboardOnTouchOutside from '@components/HideKeyboardOnTouchOutside';
 import Form from '@components/Form';
@@ -15,32 +15,49 @@ const Login = ({ navigation }: LoginProps) => {
   return (
     <HideKeyboardOnTouchOutside>
       <View style={loginStyles.container}>
-        <Text style={loginStyles.title}>Login</Text>
+        <View style={loginStyles.header}>
+          <Avatar.Icon icon="user" size={90} />
+          <Headline>Entrar</Headline>
+        </View>
 
-        <Form onSubmit={onSubmit} validationSchema={loginSchema}>
-          {({ submitForm }) => {
-            return (
-              <>
-                <Field
-                  name="email"
-                  label="Email"
-                  mode="outlined"
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                />
-                <Field name="senha" label="Senha" mode="outlined" secureTextEntry />
+        <View style={loginStyles.form}>
+          <Form onSubmit={onSubmit} validationSchema={loginSchema}>
+            {({ submitForm }) => {
+              return (
+                <>
+                  <View style={loginStyles.field}>
+                    <Field
+                      name="email"
+                      label="E-mail"
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      placeholder="Digite o e-mail"
+                      left={<TextInput.Icon name="envelope" color="#7c7a7a" />}
+                    />
+                  </View>
+                  <View style={loginStyles.field}>
+                    <Field
+                      name="senha"
+                      label="Senha"
+                      secureTextEntry
+                      placeholder="Digite a senha"
+                      left={<TextInput.Icon name="lock" color="#7c7a7a" />}
+                    />
+                  </View>
 
-                <Button mode="outlined" onPress={submitForm()}>
-                  Submit
-                </Button>
-              </>
-            );
-          }}
-        </Form>
+                  <Button mode="contained" onPress={submitForm()} style={loginStyles.button}>
+                    Entrar
+                  </Button>
+                </>
+              );
+            }}
+          </Form>
+        </View>
 
-        <Button mode="contained" onPress={() => navigation.push('Cadastro')} icon="camera">
-          Cadastrar-se
-        </Button>
+        <View style={loginStyles.footer}>
+          <Text>Não possui uma conta?</Text>
+          <Button onPress={() => navigation.push('Cadastro')}>Cadastre-se</Button>
+        </View>
       </View>
     </HideKeyboardOnTouchOutside>
   );
