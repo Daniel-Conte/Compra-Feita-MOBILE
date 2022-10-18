@@ -12,7 +12,16 @@ module.exports = function (api) {
             '@hooks': './src/hooks',
             '@config': './src/config',
             '@navigation': './src/navigation',
+            '@services': './src/services',
           },
+        },
+      ],
+      [
+        'module:react-native-dotenv',
+        {
+          envName: 'APP_ENV',
+          moduleName: '@env',
+          path: '.env',
         },
       ],
       'react-native-paper/babel',
