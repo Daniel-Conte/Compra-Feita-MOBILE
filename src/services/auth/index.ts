@@ -1,17 +1,12 @@
 import axios from '../config';
 import authEndpoints from './endpoints';
-
-import type { LoginRequest } from './types';
+import type { LoginRequest, LoginResponse } from './types';
 
 const authApi = {
   async login(payload: LoginRequest) {
-    try {
-      const res = await axios.post(authEndpoints.login, payload);
+    const res: LoginResponse = await axios.post(authEndpoints.login, payload);
 
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
+    return res;
   },
 };
 

@@ -20,7 +20,16 @@ instance.interceptors.response.use(
 
     return resp;
   },
-  undefined,
+  errorResp => {
+    if (errorResp?.response?.data?.error) {
+      throw {
+        message: errorResp.response.data.error,
+        status: errorResp.response.status,
+      };
+    }
+
+    throw errorResp;
+  },
   { synchronous: true },
 );
 
