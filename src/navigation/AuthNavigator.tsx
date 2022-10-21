@@ -2,13 +2,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from '@screens/Auth/Login';
 import Cadastro from '@screens/Auth/Cadastro';
-import { AuthStackParamList } from './types';
+import globalStyles from './globalStyles';
+import type { AuthStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ contentStyle: globalStyles.container }}>
       <Stack.Screen
         name="Login"
         component={Login}

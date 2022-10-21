@@ -4,7 +4,6 @@ const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-evenly',
-    backgroundColor: '#f6f6f6',
   },
   header: {
     alignItems: 'center',
