@@ -9,7 +9,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@config/*": ["./src/config/*"],
       "@navigation/*": ["./src/navigation/*"],
-      "@services/*": ["./src/services/*"]
+      "@services/*": ["./src/services/*"],
+      "@store/*": ["./src/store/*"]
     }
   }
 }

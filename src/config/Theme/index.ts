@@ -1,6 +1,6 @@
 import { DefaultTheme, DarkTheme, Colors } from 'react-native-paper';
 
-import type { Theme, VariantStyles } from './types';
+import type { Theme, VariantIcons, VariantStyles } from './types';
 
 const themes: { light: Theme; dark: Theme } = {
   light: {
@@ -23,9 +23,15 @@ const colorVariants = {
   danger: Colors.red600,
 };
 
+const variantIcons: VariantIcons = {
+  success: 'check-circle',
+  danger: 'times-circle',
+  warning: 'warning',
+};
+
 const variantStyles: VariantStyles = {
-  success: { onSurface: colorVariants.success, accent: Colors.black },
-  danger: { onSurface: colorVariants.danger, accent: Colors.greenA200 },
+  success: { onSurface: colorVariants.success, accent: Colors.black, text: Colors.white },
+  danger: { onSurface: colorVariants.danger, accent: Colors.greenA200, text: Colors.white },
   warning: {
     onSurface: colorVariants.warning,
     accent: Colors.blue800,
@@ -33,5 +39,5 @@ const variantStyles: VariantStyles = {
   },
 };
 
-export { colorVariants, variantStyles };
+export { colorVariants, variantStyles, variantIcons };
 export default themes;
