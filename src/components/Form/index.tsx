@@ -1,3 +1,4 @@
+import { Keyboard } from 'react-native';
 import { useForm, FormProvider, FieldValues } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import setLocale from 'yup/lib/setLocale';
@@ -21,7 +22,12 @@ function Form<FormValues extends FieldValues>({
     ...useFormProps,
   });
 
-  const submitForm = () => methods.handleSubmit(onSubmit);
+  const submitForm = () =>
+    methods.handleSubmit(data => {
+      Keyboard.dismiss();
+
+      onSubmit(data);
+    });
 
   return <FormProvider {...methods}>{children({ ...methods, submitForm })}</FormProvider>;
 }
