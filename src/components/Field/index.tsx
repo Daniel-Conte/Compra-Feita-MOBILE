@@ -4,7 +4,14 @@ import { TextInput } from 'react-native-paper';
 import ErrorMessage from './ErrorMessage';
 import type { FieldProps } from './types';
 
-const Field = ({ name, defaultValue, rules, shouldUnregister, ...textInputProps }: FieldProps) => {
+const Field = ({
+  name,
+  defaultValue,
+  rules,
+  shouldUnregister,
+  mask,
+  ...textInputProps
+}: FieldProps) => {
   return (
     <Controller
       name={name}
@@ -16,7 +23,7 @@ const Field = ({ name, defaultValue, rules, shouldUnregister, ...textInputProps 
           <TextInput
             {...textInputProps}
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChangeText={value => onChange(mask ? mask(value) : value)}
             value={value}
             ref={ref}
             error={!!error}
