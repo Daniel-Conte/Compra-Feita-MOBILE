@@ -6,3 +6,12 @@ export type LoginRequest = {
 };
 
 export type LoginResponse = ApiResponse<string>;
+
+export type RegisterRequest = {
+  senha: string;
+  nome: string;
+  email: string;
+  telefone: string;
+};
+
+export type RegisterResponse = ApiResponse<string>;

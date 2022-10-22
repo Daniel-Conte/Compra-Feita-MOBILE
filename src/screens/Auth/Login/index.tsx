@@ -10,7 +10,7 @@ import loginStyles from './styles';
 import type { LoginProps } from './types';
 
 const Login = ({ navigation }: LoginProps) => {
-  const { onSubmit } = useLogin(navigation.goBack);
+  const { onSubmit } = useLogin(navigation.pop);
 
   return (
     <HideKeyboardOnTouchOutside>

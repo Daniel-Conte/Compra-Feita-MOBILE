@@ -9,13 +9,14 @@ const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ contentStyle: globalStyles.container }}>
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerTransparent: true, headerTitle: '' }}
-      />
-      <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+    <Stack.Navigator
+      screenOptions={{
+        contentStyle: globalStyles.container,
+        headerTransparent: true,
+        headerTitle: '',
+      }}>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Cadastro" component={Cadastro} />
     </Stack.Navigator>
   );
 };
