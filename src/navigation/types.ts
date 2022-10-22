@@ -60,6 +60,7 @@ export type ProdutosStackScreenProps<Screen extends keyof ProdutosStackParamList
 export type PedidosStackParamList = {
   PedidosList: undefined;
   PedidoCreate: { idProdutos: number[] };
+  NotLoggedIn: undefined;
 };
 
 export type PedidosStackScreenProps<Screen extends keyof PedidosStackParamList> =
@@ -71,6 +72,7 @@ export type PedidosStackScreenProps<Screen extends keyof PedidosStackParamList> 
 // Carrinho de compras
 export type CarrinhoStackParamList = {
   CarrinhoList: undefined;
+  NotLoggedIn: undefined;
 };
 
 export type CarrinhoStackScreenProps<Screen extends keyof CarrinhoStackParamList> =
@@ -82,6 +84,7 @@ export type CarrinhoStackScreenProps<Screen extends keyof CarrinhoStackParamList
 // Perfil
 export type PerfilStackParamList = {
   PerfilPage: undefined;
+  NotLoggedIn: undefined;
 };
 
 export type PerfilStackScreenProps<Screen extends keyof PerfilStackParamList> =
