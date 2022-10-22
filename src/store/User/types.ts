@@ -1,5 +1,7 @@
-export interface UserStore extends User {
-  setUser: (user: User) => void;
+export interface UserStore {
+  user: User | null;
+
+  setUser: (user: User | null) => void;
 }
 
 export type User = {
