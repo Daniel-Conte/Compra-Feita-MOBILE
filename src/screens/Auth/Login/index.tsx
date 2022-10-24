@@ -21,7 +21,7 @@ const Login = ({ navigation }: LoginProps) => {
         </View>
 
         <View style={loginStyles.form}>
-          <Form onSubmit={onSubmit} validationSchema={loginSchema}>
+          <Form onSubmit={onSubmit} schema={loginSchema}>
             {({ submitForm }) => {
               return (
                 <>

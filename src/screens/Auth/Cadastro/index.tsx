@@ -22,7 +22,7 @@ const Cadastro = ({ navigation }: CadastroProps) => {
         </View>
 
         <View style={cadastroStyles.form}>
-          <Form onSubmit={onSubmit} validationSchema={cadastroSchema}>
+          <Form onSubmit={onSubmit} schema={cadastroSchema}>
             {({ submitForm }) => {
               return (
                 <>

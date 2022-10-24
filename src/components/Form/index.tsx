@@ -8,17 +8,17 @@ import type { FormProps } from './types';
 
 setLocale(customErrorMessages);
 
-function Form<FormValues extends FieldValues>({
+const Form = <FormValues extends FieldValues>({
   children,
   onSubmit,
-  validationSchema,
+  schema,
   ...useFormProps
-}: FormProps<FormValues>) {
+}: FormProps<FormValues>) => {
   const methods = useForm<FormValues>({
     shouldFocusError: true,
     criteriaMode: 'all',
     mode: 'onBlur',
-    resolver: validationSchema ? yupResolver(validationSchema) : undefined,
+    resolver: schema ? yupResolver(schema) : undefined,
     ...useFormProps,
   });
 
@@ -30,6 +30,6 @@ function Form<FormValues extends FieldValues>({
     });
 
   return <FormProvider {...methods}>{children({ ...methods, submitForm })}</FormProvider>;
-}
+};
 
 export default Form;
