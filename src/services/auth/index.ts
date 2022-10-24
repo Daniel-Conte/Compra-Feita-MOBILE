@@ -13,6 +13,11 @@ const authApi = {
 
     return res;
   },
+  async validateToken(token: string) {
+    await axios.get(authEndpoints.validateToken, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
 };
 
 export default authApi;

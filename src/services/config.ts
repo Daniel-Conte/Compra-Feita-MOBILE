@@ -13,7 +13,8 @@ const instance = axios.create({
 instance.interceptors.request.use(async config => {
   const token = await SecureStore.getItemAsync(AUTH_TOKEN_KEY);
 
-  if (token && config?.headers) config.headers['Authorization'] = `Bearer ${token}`;
+  if (token && config?.headers && !config.headers['Authorization'])
+    config.headers['Authorization'] = `Bearer ${token}`;
 
   return config;
 });
