@@ -14,7 +14,7 @@ const useCadastro = (onSuccess: () => void) => {
 
       if (!resp?.data) throw new Error('Ocorreu um erro no cadastro');
 
-      toggleSnackbar({ title: resp.data, variant: 'success' });
+      toggleSnackbar({ title: resp.data.message, variant: 'success' });
       onSuccess();
     } catch (error) {
       const message = parseError(error);

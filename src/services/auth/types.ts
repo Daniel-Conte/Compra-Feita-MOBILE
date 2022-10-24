@@ -1,4 +1,4 @@
-import { ApiResponse } from '../types';
+import type { ApiResponse, MessageResponse } from '../types';
 
 export type LoginRequest = {
   email: string;
@@ -14,4 +14,4 @@ export type RegisterRequest = {
   telefone: string;
 };
 
-export type RegisterResponse = ApiResponse<string>;
+export type RegisterResponse = ApiResponse<MessageResponse>;
