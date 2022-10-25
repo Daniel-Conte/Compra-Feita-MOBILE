@@ -1,4 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
+import jwtDecode from 'jwt-decode';
+import { useNavigation } from '@react-navigation/native';
 
 import usuariosApi from '@services/usuarios';
 import useAppStore from '@store/App';
@@ -12,6 +14,8 @@ const usePerfil = () => {
   const _toggleLoading = useAppStore(state => state.toggleLoading);
   const _toggleSnackbar = useAppStore(state => state.toggleSnackbar);
   const _user = useUserStore(state => state.user);
+  const _setUser = useUserStore(state => state.setUser);
+  const { navigate } = useNavigation();
 
   const initialValues: Partial<UserEditFormValues> = {
     email: _user?.email,
@@ -30,6 +34,7 @@ const usePerfil = () => {
 
       if (resp.data.token) {
         await SecureStore.setItemAsync(AUTH_TOKEN_KEY, resp.data.token);
+        _setUser(jwtDecode(resp.data.token));
       }
 
       _toggleSnackbar({ title: resp.data?.message, variant: 'success' });
@@ -42,7 +47,14 @@ const usePerfil = () => {
     }
   };
 
-  return { onSubmit, initialValues };
+  const onLogout = async () => {
+    navigate('Auth', { screen: 'Login' });
+
+    await SecureStore.deleteItemAsync(AUTH_TOKEN_KEY);
+    _setUser(null);
+  };
+
+  return { onSubmit, initialValues, onLogout };
 };
 
 export default usePerfil;
