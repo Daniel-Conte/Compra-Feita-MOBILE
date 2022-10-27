@@ -1,7 +1,7 @@
 import { Controller } from 'react-hook-form';
 import { TextInput } from 'react-native-paper';
 
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 import type { FieldProps } from './types';
 
 const Field = ({
