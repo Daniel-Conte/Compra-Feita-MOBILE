@@ -1,6 +1,13 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { BottomTabNavigationProp, BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import type {
+  CompositeNavigationProp,
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from '@react-navigation/native';
+import type {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 
 declare global {
   namespace ReactNavigation {
@@ -84,6 +91,7 @@ export type CarrinhoStackScreenProps<Screen extends keyof CarrinhoStackParamList
 // Perfil
 export type PerfilStackParamList = {
   PerfilPage: undefined;
+  EnderecoForm: { mode: 'new' } | { mode: 'edit'; codigoEndereco: number };
   NotLoggedIn: undefined;
 };
 
@@ -92,3 +100,10 @@ export type PerfilStackScreenProps<Screen extends keyof PerfilStackParamList> =
     NativeStackScreenProps<PerfilStackParamList, Screen>,
     RootTabScreenProps<'Perfil'>
   >;
+
+export type PerfilScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<RootTabParamList, 'Perfil'>,
+  NativeStackNavigationProp<PerfilStackParamList>
+>;
+
+export type PerfilScreenRouteProp = PerfilStackScreenProps<'EnderecoForm'>['route'];

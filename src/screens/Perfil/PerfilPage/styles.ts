@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 const perfilStyles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
     paddingBottom: 5,
     justifyContent: 'space-between',
@@ -15,6 +14,9 @@ const perfilStyles = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: 15,
     alignSelf: 'flex-end',
+  },
+  buttonSair: {
+    marginTop: 15,
   },
 });
 

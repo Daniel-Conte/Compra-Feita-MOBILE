@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import useUserStore from '@store/User';
 import PerfilPage from '@screens/Perfil/PerfilPage';
+import EnderecoForm from '@screens/Perfil/EnderecoForm';
 import PerfilNotLoggedIn from '@screens/Perfil/NotLoggedIn';
 import globalStyles from '../globalStyles';
 import type { PerfilStackParamList } from '../types';
@@ -14,7 +15,16 @@ const PerfilNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ contentStyle: globalStyles.container }}>
       {isLoggedIn ? (
-        <Stack.Screen name="PerfilPage" component={PerfilPage} options={{ headerShown: false }} />
+        <>
+          <Stack.Screen name="PerfilPage" component={PerfilPage} options={{ title: 'Perfil' }} />
+          <Stack.Screen
+            name="EnderecoForm"
+            component={EnderecoForm}
+            options={({ route }) => ({
+              title: route.params.mode === 'new' ? 'Novo Endereço' : 'Editar Endereço',
+            })}
+          />
+        </>
       ) : (
         <Stack.Screen
           name="NotLoggedIn"

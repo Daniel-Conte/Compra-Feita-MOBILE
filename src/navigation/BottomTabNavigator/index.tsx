@@ -61,6 +61,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: getTabBarLabel('Perfil'),
           tabBarIcon: getTabBarIcon('user'),
           tabBarButton: getTabBarButton,
+          headerShown: false,
         }}
       />
     </BottomTab.Navigator>

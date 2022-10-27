@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Button, Title } from 'react-native-paper';
 
 import usePerfil from './usePerfil';
@@ -6,6 +6,7 @@ import Form from '@components/Form';
 import Field from '@components/Field';
 import { phoneMask } from '@components/Form/masks/phone';
 import { colorVariants } from '@config/Theme';
+import Enderecos from './Enderecos';
 import perfilStyles from './styles';
 import userEditSchema from './schema';
 import type { PerfilProps } from './types';
@@ -14,7 +15,7 @@ const PerfilPage = ({}: PerfilProps) => {
   const { onSubmit, initialValues, onLogout } = usePerfil();
 
   return (
-    <View style={perfilStyles.container}>
+    <ScrollView contentContainerStyle={perfilStyles.container}>
       <View>
         <Title>Informações básicas</Title>
 
@@ -52,12 +53,20 @@ const PerfilPage = ({}: PerfilProps) => {
             </>
           )}
         </Form>
+
+        <View style={{ marginTop: 25 }}>
+          <Enderecos />
+        </View>
       </View>
 
-      <Button mode="outlined" onPress={onLogout} color={colorVariants.danger}>
+      <Button
+        mode="outlined"
+        onPress={onLogout}
+        color={colorVariants.danger}
+        style={perfilStyles.buttonSair}>
         Sair da conta
       </Button>
-    </View>
+    </ScrollView>
   );
 };
 
