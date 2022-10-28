@@ -4,11 +4,42 @@ import { Button } from 'react-native-paper';
 import HideKeyboardOnTouchOutside from '@components/HideKeyboardOnTouchOutside';
 import Form from '@components/Form';
 import Field from '@components/Field';
+import Select from '@components/Select';
 import { cepMask } from '@components/Form/masks/cep';
+import type { SelectItem } from '@components/Select/types';
 import useEnderecoForm from './useEnderecoForm';
 import cadastroSchema from './schema';
 import cadastroStyles from './styles';
-import Select from '@components/Select';
+
+const states: SelectItem[] = [
+  { title: 'RS', value: 'RS' },
+  { title: 'SC', value: 'SC' },
+  { title: 'PR', value: 'PR' },
+  { title: 'MS', value: 'MS' },
+  { title: 'MT', value: 'MT' },
+  { title: 'GO', value: 'GO' },
+  { title: 'DF', value: 'DF' },
+  { title: 'MG', value: 'MG' },
+  { title: 'SP', value: 'SP' },
+  { title: 'RJ', value: 'RJ' },
+  { title: 'ES', value: 'ES' },
+  { title: 'BA', value: 'BA' },
+  { title: 'SE', value: 'SE' },
+  { title: 'AL', value: 'AL' },
+  { title: 'PE', value: 'PE' },
+  { title: 'PB', value: 'PB' },
+  { title: 'RN', value: 'RN' },
+  { title: 'CE', value: 'CE' },
+  { title: 'PI', value: 'PI' },
+  { title: 'MA', value: 'MA' },
+  { title: 'TO', value: 'TO' },
+  { title: 'PA', value: 'PA' },
+  { title: 'AP', value: 'AP' },
+  { title: 'RR', value: 'RR' },
+  { title: 'AM', value: 'AM' },
+  { title: 'RO', value: 'RO' },
+  { title: 'AC', value: 'AC' },
+];
 
 const EnderecoForm = () => {
   const { onSubmit, initialValues, mode } = useEnderecoForm();
@@ -42,24 +73,13 @@ const EnderecoForm = () => {
                   placeholder="Digite sua cidade"
                   style={cadastroStyles.field}
                 />
-                {/* <Field
-                  name="uf"
-                  label="Estado"
-                  placeholder="Selecione seu estado"
-                  style={cadastroStyles.field}
-                /> */}
                 <Select
                   name="uf"
                   label="Estado"
                   placeholder="Selecione seu estado"
-                  style={cadastroStyles.field}>
-                  {/* <Select.Item title="teste" />
-                  <Select.Item title="teste" />
-                  <Select.Item title="teste" /> */}
-                  <Select.Item onPress={() => setValue('uf', 'RS')}>Teste</Select.Item>
-                  <Select.Item>Teste</Select.Item>
-                  <Select.Item>Teste</Select.Item>
-                </Select>
+                  items={states}
+                  style={cadastroStyles.field}
+                />
                 <Field
                   name="bairro"
                   label="Bairro"
