@@ -8,6 +8,7 @@ import { cepMask } from '@components/Form/masks/cep';
 import useEnderecoForm from './useEnderecoForm';
 import cadastroSchema from './schema';
 import cadastroStyles from './styles';
+import Select from '@components/Select';
 
 const EnderecoForm = () => {
   const { onSubmit, initialValues, mode } = useEnderecoForm();
@@ -18,7 +19,7 @@ const EnderecoForm = () => {
     <HideKeyboardOnTouchOutside>
       <ScrollView contentContainerStyle={cadastroStyles.container}>
         <Form onSubmit={onSubmit} defaultValues={initialValues} schema={cadastroSchema}>
-          {({ submitForm }) => {
+          {({ submitForm, setValue }) => {
             return (
               <View style={cadastroStyles.form}>
                 <Field
@@ -41,12 +42,24 @@ const EnderecoForm = () => {
                   placeholder="Digite sua cidade"
                   style={cadastroStyles.field}
                 />
-                <Field
+                {/* <Field
                   name="uf"
                   label="Estado"
                   placeholder="Selecione seu estado"
                   style={cadastroStyles.field}
-                />
+                /> */}
+                <Select
+                  name="uf"
+                  label="Estado"
+                  placeholder="Selecione seu estado"
+                  style={cadastroStyles.field}>
+                  {/* <Select.Item title="teste" />
+                  <Select.Item title="teste" />
+                  <Select.Item title="teste" /> */}
+                  <Select.Item onPress={() => setValue('uf', 'RS')}>Teste</Select.Item>
+                  <Select.Item>Teste</Select.Item>
+                  <Select.Item>Teste</Select.Item>
+                </Select>
                 <Field
                   name="bairro"
                   label="Bairro"
