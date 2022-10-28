@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Controller, useFormContext, useFormState } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { Pressable, View } from 'react-native';
 import { Menu, TextInput } from 'react-native-paper';
 
 import ErrorMessage from '../ErrorMessage';
-import Item from './SelectItem';
-import type { SelectItemProps, SelectProps } from './types';
+import type { SelectProps } from './types';
 
 const Select = ({
   name,
@@ -13,9 +12,9 @@ const Select = ({
   rules,
   shouldUnregister,
   children,
+  items,
   ...textInputProps
 }: SelectProps) => {
-  const { control } = useFormContext();
   const [menuVisible, setMenuVisible] = useState(false);
 
   return (
@@ -36,7 +35,6 @@ const Select = ({
                     {...textInputProps}
                     onBlur={onBlur}
                     onChangeText={onChange}
-                    //onPressOut={() => setMenuVisible(true)}
                     value={value}
                     editable={false}
                     ref={ref}
@@ -47,22 +45,21 @@ const Select = ({
                 </>
               </Pressable>
             }>
-            <SelectItemm>Teste</SelectItemm>
-            {children}
+            {items.map((item, index) => (
+              <Menu.Item
+                key={`${name}${index}`}
+                onPress={() => {
+                  onChange(item.value);
+                  setMenuVisible(false);
+                }}
+                {...item}
+              />
+            ))}
           </Menu>
         </View>
       )}
     />
   );
 };
-
-const SelectItemm = ({ children, ...itemProps }: SelectItemProps) => {
-  const form = useFormContext();
-
-  console.log(form);
-  return <></>;
-};
-
-Select.Item = Item;
 
 export default Select;
