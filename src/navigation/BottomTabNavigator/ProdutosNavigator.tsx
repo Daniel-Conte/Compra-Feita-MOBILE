@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import ProdutosList from '@screens/Produtos/List';
+import ProdutosList from '@screens/Produtos';
 import ProdutoDetails from '@screens/Produtos/Details';
 import globalStyles from '../globalStyles';
 import type { ProdutosStackParamList } from '../types';
