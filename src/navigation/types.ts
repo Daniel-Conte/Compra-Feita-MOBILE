@@ -54,7 +54,7 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 // Produtos
 export type ProdutosStackParamList = {
   ProdutosList: undefined;
-  ProdutosDetails: { nome: string };
+  ProdutoDetails: { codigoProduto: number };
 };
 
 export type ProdutosStackScreenProps<Screen extends keyof ProdutosStackParamList> =
@@ -62,6 +62,14 @@ export type ProdutosStackScreenProps<Screen extends keyof ProdutosStackParamList
     NativeStackScreenProps<ProdutosStackParamList, Screen>,
     RootTabScreenProps<'Produtos'>
   >;
+
+export type ProdutosScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<RootTabParamList, 'Produtos'>,
+  NativeStackNavigationProp<ProdutosStackParamList>
+>;
+
+export type ProdutosScreenRouteProp<Screen extends keyof ProdutosStackParamList> =
+  ProdutosStackScreenProps<Screen>['route'];
 
 // Pedidos
 export type PedidosStackParamList = {

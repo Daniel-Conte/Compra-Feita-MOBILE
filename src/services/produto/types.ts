@@ -21,3 +21,5 @@ export type ProdutoListItem = Pick<Produto, 'codigo' | 'nome' | 'precoUnitario'>
 };
 
 export type GetProdutoListResponse = ApiResponse<ProdutoListItem[]>;
+
+export type GetProdutoResponse = ApiResponse<Produto>;

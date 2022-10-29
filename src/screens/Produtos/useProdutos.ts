@@ -1,12 +1,14 @@
 import { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import produtoApi from '@services/produto';
 import type { ProdutoListItem } from '@services/produto/types';
+import type { ProdutosScreenNavigationProp } from '@navigation/types';
 import useAppStore from '@store/App';
 import parseError from '@utils/parseError';
 
 const useProdutos = () => {
+  const navigation = useNavigation<ProdutosScreenNavigationProp>();
   const toggleSnackbar = useAppStore(state => state.toggleSnackbar);
   const [produtosList, _setProdutosList] = useState<ProdutoListItem[]>([]);
 
@@ -28,7 +30,11 @@ const useProdutos = () => {
     }
   };
 
-  return { produtosList };
+  const onPressProdutoItem = (item: ProdutoListItem) => {
+    navigation.push('ProdutoDetails', { codigoProduto: item.codigo });
+  };
+
+  return { produtosList, onPressProdutoItem };
 };
 
 export default useProdutos;

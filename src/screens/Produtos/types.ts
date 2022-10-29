@@ -5,4 +5,5 @@ export interface ProdutosProps extends ProdutosStackScreenProps<'ProdutosList'> 
 
 export interface ProdutoItemProps {
   produto: ProdutoListItem;
+  onPress: () => void;
 }

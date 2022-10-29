@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Button } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons';
 import type {
   BottomTabBarButtonProps,
@@ -11,27 +10,22 @@ import PedidosNavigator from './PedidosNavigator';
 import CarrinhoNavigator from './CarrinhoNavigator';
 import PerfilNavigator from './PerfilNavigator';
 import TabBar from '@components/TabBar';
-import type { RootTabParamList, RootTabScreenProps } from '../types';
-import useUserStore from '@store/User';
+import type { RootTabParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 const BottomTabNavigator = () => {
-  const isloggedIn = useUserStore(state => !!state.user);
-
   return (
     <BottomTab.Navigator initialRouteName="Produtos">
       <BottomTab.Screen
         name="Produtos"
         component={ProdutosNavigator}
-        options={({ navigation }: RootTabScreenProps<'Produtos'>) => ({
+        options={{
           tabBarLabel: getTabBarLabel('Produtos'),
           tabBarIcon: getTabBarIcon('cubes'),
           tabBarButton: getTabBarButton,
-          headerRight: getLoginButton(isloggedIn, () =>
-            navigation.push('Auth', { screen: 'Login' }),
-          ),
-        })}
+          headerShown: false,
+        }}
       />
 
       <BottomTab.Screen
@@ -65,16 +59,6 @@ const BottomTabNavigator = () => {
         }}
       />
     </BottomTab.Navigator>
-  );
-};
-
-const getLoginButton = (isLoggedIn: boolean, onPress: () => void) => {
-  if (isLoggedIn) return;
-
-  return () => (
-    <Button mode="contained" onPress={onPress} style={{ marginRight: 10 }} icon="sign-in">
-      Entrar
-    </Button>
   );
 };
 
