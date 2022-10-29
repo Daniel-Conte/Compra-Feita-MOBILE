@@ -2,13 +2,13 @@ import { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 
 import produtoApi from '@services/produto';
-import type { Produto } from '@services/produto/types';
+import type { ProdutoListItem } from '@services/produto/types';
 import useAppStore from '@store/App';
 import parseError from '@utils/parseError';
 
 const useProdutos = () => {
   const toggleSnackbar = useAppStore(state => state.toggleSnackbar);
-  const [produtosList, _setProdutosList] = useState<Produto[]>([]);
+  const [produtosList, _setProdutosList] = useState<ProdutoListItem[]>([]);
 
   useFocusEffect(
     useCallback(() => {

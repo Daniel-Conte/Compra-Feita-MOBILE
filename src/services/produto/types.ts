@@ -16,4 +16,8 @@ export type Produto = {
   codigoCategoria: number;
 };
 
-export type GetProdutoListResponse = ApiResponse<Produto[]>;
+export type ProdutoListItem = Pick<Produto, 'codigo' | 'nome' | 'precoUnitario'> & {
+  imagem: string;
+};
+
+export type GetProdutoListResponse = ApiResponse<ProdutoListItem[]>;
