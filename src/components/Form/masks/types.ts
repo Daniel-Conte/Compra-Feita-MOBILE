@@ -1,1 +1,1 @@
-export type Mask<T = any> = (value: T) => T;
+export type Mask<T = any, R = T> = (value: T) => R;
