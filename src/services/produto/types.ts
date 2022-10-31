@@ -6,6 +6,13 @@ export type Produto = {
   descricao: string;
   precoUnitario: number;
   estoque: number;
+  categoria: {
+    codigo: number;
+    nome: string;
+    descricao: string | null;
+    codigoCategoriaPai: number | null;
+  };
+  imagens: string[];
   altura: number | null;
   comprimento: number | null;
   largura: number | null;
@@ -13,7 +20,6 @@ export type Produto = {
   modelo: string | null;
   criadoEm: Date;
   atualizadoEm: Date;
-  codigoCategoria: number;
 };
 
 export type ProdutoListItem = Pick<Produto, 'codigo' | 'nome' | 'precoUnitario'> & {
