@@ -40,6 +40,12 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
   NativeStackScreenProps<RootStackParamList>
 >;
 
+export type RootTabScreenNavigationProps<Screen extends keyof RootTabParamList> =
+  CompositeNavigationProp<
+    NativeStackNavigationProp<RootStackParamList>,
+    BottomTabNavigationProp<RootTabParamList, Screen>
+  >;
+
 // Auth
 export type AuthStackParamList = {
   Login: undefined;
@@ -64,8 +70,8 @@ export type ProdutosStackScreenProps<Screen extends keyof ProdutosStackParamList
   >;
 
 export type ProdutosScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<RootTabParamList, 'Produtos'>,
-  NativeStackNavigationProp<ProdutosStackParamList>
+  NativeStackNavigationProp<ProdutosStackParamList>,
+  RootTabScreenNavigationProps<'Produtos'>
 >;
 
 export type ProdutosScreenRouteProp<Screen extends keyof ProdutosStackParamList> =
@@ -110,8 +116,8 @@ export type PerfilStackScreenProps<Screen extends keyof PerfilStackParamList> =
   >;
 
 export type PerfilScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<RootTabParamList, 'Perfil'>,
-  NativeStackNavigationProp<PerfilStackParamList>
+  NativeStackNavigationProp<PerfilStackParamList>,
+  RootTabScreenNavigationProps<'Perfil'>
 >;
 
 export type PerfilScreenRouteProp = PerfilStackScreenProps<'EnderecoForm'>['route'];

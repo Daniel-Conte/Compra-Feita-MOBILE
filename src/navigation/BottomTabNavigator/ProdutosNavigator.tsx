@@ -27,12 +27,9 @@ const ProdutosNavigator = () => {
       <Stack.Screen
         name="ProdutoDetails"
         component={ProdutoDetails}
-        options={({ navigation }: ProdutosStackScreenProps<'ProdutoDetails'>) => ({
-          title: 'Voltar',
-          headerRight: getLoginButton(isloggedIn, () =>
-            navigation.push('Auth', { screen: 'Login' }),
-          ),
-        })}
+        options={{
+          title: 'Detalhes do produto',
+        }}
       />
     </Stack.Navigator>
   );

@@ -1,16 +1,23 @@
 import { useEffect, useState } from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import produtoApi from '@services/produto';
+import carrinhoApi from '@services/carrinho';
+import useUserStore from '@store/User';
 import useAppStore from '@store/App';
 import parseError from '@utils/parseError';
-import type { ProdutosScreenRouteProp } from '@navigation/types';
+import type { ProdutosScreenNavigationProp, ProdutosScreenRouteProp } from '@navigation/types';
 import type { Produto } from '@services/produto/types';
+import type { MenuQtd } from './types';
 
 const useProdutoDetails = () => {
   const route = useRoute<ProdutosScreenRouteProp<'ProdutoDetails'>>();
+  const navigation = useNavigation<ProdutosScreenNavigationProp>();
+  const user = useUserStore(state => state.user);
   const toggleSnackbar = useAppStore(state => state.toggleSnackbar);
+  const toggleLoading = useAppStore(state => state.toggleLoading);
   const [produto, _setProduto] = useState<Produto | null>(null);
+  const [menuQtd, _setMenuQtd] = useState<MenuQtd>({ visible: false, qtd: 1 });
 
   useEffect(() => {
     const fetchProduto = async (codigo: number) => {
@@ -30,7 +37,39 @@ const useProdutoDetails = () => {
     if (codigoProduto) fetchProduto(codigoProduto);
   }, []);
 
-  return { produto };
+  const onOpenMenuQtd = () => _setMenuQtd(curr => ({ ...curr, visible: true }));
+
+  const onDismissMenuQtd = () => _setMenuQtd(curr => ({ ...curr, visible: false }));
+
+  const onSetQtd = (qtd: number) => _setMenuQtd({ qtd, visible: false });
+
+  const onAddToCart = async (prod: Produto) => {
+    try {
+      if (!user) {
+        return toggleSnackbar({
+          title: 'Entre para adicionar ao carrinho',
+          variant: 'warning',
+          action: {
+            label: 'Entrar',
+            onPress: () => navigation.navigate('Auth', { screen: 'Login' }),
+          },
+        });
+      }
+
+      toggleLoading(true);
+      const res = await carrinhoApi.insert({ codigoProduto: prod.codigo, quantidade: menuQtd.qtd });
+
+      if (res?.data?.message) toggleSnackbar({ title: res.data.message, variant: 'success' });
+    } catch (error) {
+      const message = parseError(error);
+
+      toggleSnackbar({ title: message, variant: 'danger' });
+    } finally {
+      toggleLoading(false);
+    }
+  };
+
+  return { produto, onAddToCart, menuQtd, onSetQtd, onDismissMenuQtd, onOpenMenuQtd };
 };
 
 export default useProdutoDetails;
