@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import ErrorMessage from '../ErrorMessage';
@@ -19,7 +20,7 @@ const Field = ({
       rules={rules}
       shouldUnregister={shouldUnregister}
       render={({ field: { onBlur, onChange, ref, value }, fieldState: { error } }) => (
-        <>
+        <View>
           <TextInput
             {...textInputProps}
             onBlur={onBlur}
@@ -29,7 +30,7 @@ const Field = ({
             error={!!error}
           />
           {error && <ErrorMessage>{error.message}</ErrorMessage>}
-        </>
+        </View>
       )}
     />
   );
