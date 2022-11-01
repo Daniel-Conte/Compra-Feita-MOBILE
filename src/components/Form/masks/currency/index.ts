@@ -1,3 +1,4 @@
+import { numberMask } from '../number';
 import type { Mask } from '../types';
 
 const mask: Mask<string | number, string> = value => {
@@ -10,12 +11,7 @@ const mask: Mask<string | number, string> = value => {
   if (newValue.length > 6) {
     const [milhar, decimal] = newValue.split(',');
 
-    const withPonctuation = milhar
-      .split('')
-      .reverse()
-      .map((num, index) => (index && index % 3 == 0 ? num + '.' : num))
-      .reverse()
-      .join('');
+    const withPonctuation = numberMask(milhar);
 
     newValue = `${withPonctuation},${decimal}`;
   }
