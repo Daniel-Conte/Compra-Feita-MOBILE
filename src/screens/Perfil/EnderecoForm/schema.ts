@@ -7,7 +7,10 @@ const enderecoFormSchema = yup.object({
   codigo: yup.number(),
   nome: yup.string().required(),
   cidade: yup.string().required(),
-  uf: yup.string().required(),
+  uf: yup
+    .string()
+    .transform(value => value?.value)
+    .required(),
   cep: yup.string().transform(cepUnMask).concat(cepValidate).required(),
   bairro: yup.string().required(),
   rua: yup.string().required(),

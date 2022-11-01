@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Pressable, View } from 'react-native';
-import { Menu, TextInput } from 'react-native-paper';
+import { Menu, Subheading, TextInput } from 'react-native-paper';
 
 import ErrorMessage from '../ErrorMessage';
 import type { SelectProps } from './types';
@@ -30,7 +30,7 @@ const Select = ({
             onDismiss={() => setMenuVisible(false)}
             anchor={
               <Pressable onPress={() => setMenuVisible(true)}>
-                <>
+                <View>
                   <TextInput
                     {...textInputProps}
                     onBlur={onBlur}
@@ -40,16 +40,21 @@ const Select = ({
                     ref={ref}
                     error={!!error}
                   />
+                  {value?.title && (
+                    <Subheading style={{ position: 'absolute', top: 27, left: 12 }}>
+                      {value.title}
+                    </Subheading>
+                  )}
 
                   {error && <ErrorMessage>{error.message}</ErrorMessage>}
-                </>
+                </View>
               </Pressable>
             }>
             {items.map((item, index) => (
               <Menu.Item
                 key={`${name}${index}`}
                 onPress={() => {
-                  onChange(item.value);
+                  onChange({ value: item.value, title: item.title });
                   setMenuVisible(false);
                 }}
                 {...item}
