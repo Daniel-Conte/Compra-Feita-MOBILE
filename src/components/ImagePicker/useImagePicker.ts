@@ -76,7 +76,7 @@ const useImagePicker = (
       filtered = field.value.filter((image: any) => image.codigo !== img.codigo);
     }
 
-    field.onChange(filtered.length ? filtered : undefined);
+    field.onChange(filtered);
   };
 
   return { pickImage, deleteImage };

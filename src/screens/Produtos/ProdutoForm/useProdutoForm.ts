@@ -43,13 +43,15 @@ const useProdutoForm = () => {
             title: categoria?.nome,
             value: categoria,
           },
-          imagens: produto.data.imagens?.map(img => ({ codigo: img.codigo, base64: img.imagem })),
-          precoUnitario: currencyMask(produto.data.precoUnitario),
-          altura: decimalMask(produto.data.altura),
-          estoque: numberMask(String(produto.data.estoque)),
-          comprimento: decimalMask(produto.data.comprimento),
-          largura: decimalMask(produto.data.largura),
-        } as any);
+          imagens: aux.imagens?.map(img => ({ codigo: img.codigo, base64: img.imagem })),
+          precoUnitario: currencyMask(aux.precoUnitario),
+          altura: decimalMask(aux.altura),
+          estoque: numberMask(String(aux.estoque)),
+          comprimento: decimalMask(aux.comprimento),
+          largura: decimalMask(aux.largura),
+          marca: aux.marca || undefined,
+          modelo: aux.modelo || undefined,
+        } as unknown as ProdutoFormValues);
       }
     } catch (error) {
       const message = parseError(error);
