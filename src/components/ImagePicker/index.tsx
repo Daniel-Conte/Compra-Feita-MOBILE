@@ -1,7 +1,6 @@
 import { Controller } from 'react-hook-form';
 import { View, FlatList, Image } from 'react-native';
 import { Button, IconButton } from 'react-native-paper';
-import type { ImageInfo } from 'expo-image-picker';
 
 import ErrorMessage from '@components/ErrorMessage';
 import useImagePicker from './useImagePicker';
@@ -29,15 +28,15 @@ const ImagePicker = ({
       render={({ field, fieldState: { error } }) => {
         return (
           <View style={styles.container}>
-            {field.value?.length && (
+            {!!field.value?.length && (
               <View style={styles.imageList}>
                 <FlatList
-                  data={field.value.map((img: ImageInfo) => ({ key: img.uri, img }))}
+                  data={field.value.map((img: any) => ({ key: img.uri || img.codigo, img }))}
                   horizontal
                   renderItem={({ item }) => (
                     <View style={styles.imageContainer}>
                       <Image source={{ uri: item.img?.base64 }} style={styles.image} />
-                      <IconButton icon="trash-o" onPress={() => deleteImage(item.img.uri, field)} />
+                      <IconButton icon="trash-o" onPress={() => deleteImage(item.img, field)} />
                     </View>
                   )}
                 />
