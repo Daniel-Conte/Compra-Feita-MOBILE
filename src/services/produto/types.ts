@@ -8,7 +8,10 @@ export type Produto = {
   precoUnitario: number;
   estoque: number;
   categoria: Omit<Categoria, 'criadoEm' | 'atualizadoEm'>;
-  imagens: string[];
+  imagens: {
+    codigo?: number;
+    imagem: string;
+  }[];
   altura?: number;
   comprimento?: number;
   largura?: number;

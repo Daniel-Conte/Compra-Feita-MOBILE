@@ -23,7 +23,7 @@ const ProdutoDetails = ({}: ProdutoDetailsProps) => {
           horizontal
           renderItem={({ item }) => (
             <View style={styles.imageContainer}>
-              <Image source={{ uri: item.img }} style={styles.image} />
+              <Image source={{ uri: item.img?.imagem }} style={styles.image} />
             </View>
           )}
         />
