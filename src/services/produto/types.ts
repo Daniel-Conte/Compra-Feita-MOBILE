@@ -1,4 +1,5 @@
-import type { ApiResponse } from '../types';
+import type { Categoria } from '../categoria/types';
+import type { ApiResponse, MessageResponse } from '../types';
 
 export type Produto = {
   codigo: number;
@@ -6,18 +7,13 @@ export type Produto = {
   descricao: string;
   precoUnitario: number;
   estoque: number;
-  categoria: {
-    codigo: number;
-    nome: string;
-    descricao: string | null;
-    codigoCategoriaPai: number | null;
-  };
+  categoria: Omit<Categoria, 'criadoEm' | 'atualizadoEm'>;
   imagens: string[];
-  altura: number | null;
-  comprimento: number | null;
-  largura: number | null;
-  marca: string | null;
-  modelo: string | null;
+  altura?: number;
+  comprimento?: number;
+  largura?: number;
+  marca?: string;
+  modelo?: string;
   criadoEm: Date;
   atualizadoEm: Date;
 };
@@ -29,3 +25,31 @@ export type ProdutoListItem = Pick<Produto, 'codigo' | 'nome' | 'precoUnitario'>
 export type GetProdutoListResponse = ApiResponse<ProdutoListItem[]>;
 
 export type GetProdutoResponse = ApiResponse<Produto>;
+
+export type InsertProdutoRequest = Omit<
+  Produto,
+  'codigo' | 'criadoEm' | 'atualizadoEm' | 'categoria' | 'imagens'
+> & {
+  codigoCategoria: number;
+  imagens?: {
+    codigo?: number;
+    imagem: string;
+  }[];
+};
+
+export type InsertProdutoResponse = ApiResponse<MessageResponse>;
+
+export type UpdateProdutoRequest = Omit<
+  Produto,
+  'criadoEm' | 'atualizadoEm' | 'categoria' | 'imagens'
+> & {
+  codigoCategoria: number;
+  imagens?: {
+    codigo?: number;
+    imagem: string;
+  }[];
+};
+
+export type UpdateProdutoResponse = ApiResponse<MessageResponse>;
+
+export type DeleteProdutoResponse = ApiResponse<MessageResponse>;
