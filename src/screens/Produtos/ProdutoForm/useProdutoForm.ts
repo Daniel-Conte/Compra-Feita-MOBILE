@@ -5,6 +5,9 @@ import produtoApi from '@services/produto';
 import categoriaApi from '@services/categoria';
 import useAppStore from '@store/App';
 import parseError from '@utils/parseError';
+import { currencyMask } from '@components/Form/masks/currency';
+import { decimalMask } from '@components/Form/masks/decimal';
+import { numberMask } from '@components/Form/masks/number';
 import type { ProdutosScreenNavigationProp, ProdutosScreenRouteProp } from '@navigation/types';
 import type { UpdateProdutoRequest } from '@services/produto/types';
 import type { CategoriaListItem } from '@services/categoria/types';
@@ -21,40 +24,53 @@ const useProdutoForm = () => {
   const mode = route.params.mode;
 
   useEffect(() => {
-    /* const fetchProduto = async (codigo: number) => {
-      try {
-        toggleLoading(true);
-        const produto = await produtoApi.get(codigo);
+    if (route.params.mode === 'edit') fetchProduto(route.params.codigoProduto);
 
-        if (produto?.data) {
-          _setInitialValues({
-            ...produto.data,
-            cep: cepMask(produto.data.cep),
-          } as ProdutoFormValues);
-        }
-      } catch (error) {
-        const message = parseError(error);
-
-        toggleSnackbar({ title: message, variant: 'danger' });
-      } finally {
-        toggleLoading(false);
-      }
-    }; */
-    const fetchCategorias = async () => {
-      try {
-        const list = await categoriaApi.getAll();
-
-        if (list?.data) _setCategoriasList(list.data);
-      } catch (error) {
-        const message = parseError(error);
-
-        toggleSnackbar({ title: message, variant: 'danger' });
-      }
-    };
-
-    //if (route.params.mode === 'edit') fetchProduto(route.params.codigoProduto);
     fetchCategorias();
   }, []);
+
+  const fetchProduto = async (codigo: number) => {
+    try {
+      toggleLoading(true);
+      const produto = await produtoApi.get(codigo);
+
+      if (produto?.data) {
+        const { atualizadoEm, categoria, criadoEm, ...aux } = { ...produto.data };
+
+        _setInitialValues({
+          ...aux,
+          codigoCategoria: {
+            title: categoria?.nome,
+            value: categoria,
+          },
+          imagens: produto.data.imagens?.map(img => ({ codigo: img.codigo, base64: img.imagem })),
+          precoUnitario: currencyMask(produto.data.precoUnitario),
+          altura: decimalMask(produto.data.altura),
+          estoque: numberMask(String(produto.data.estoque)),
+          comprimento: decimalMask(produto.data.comprimento),
+          largura: decimalMask(produto.data.largura),
+        } as any);
+      }
+    } catch (error) {
+      const message = parseError(error);
+
+      toggleSnackbar({ title: message, variant: 'danger' });
+    } finally {
+      toggleLoading(false);
+    }
+  };
+
+  const fetchCategorias = async () => {
+    try {
+      const list = await categoriaApi.getAll();
+
+      if (list?.data) _setCategoriasList(list.data);
+    } catch (error) {
+      const message = parseError(error);
+
+      toggleSnackbar({ title: message, variant: 'danger' });
+    }
+  };
 
   const onSubmit = async (data: ProdutoFormValues) => {
     try {

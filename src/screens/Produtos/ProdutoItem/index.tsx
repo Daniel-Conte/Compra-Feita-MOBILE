@@ -5,9 +5,9 @@ import { currencyMask } from '@components/Form/masks/currency';
 import produtoItemStyles from './styles';
 import type { ProdutoItemProps } from '../types';
 
-const ProdutoItem = ({ produto, onPress }: ProdutoItemProps) => {
+const ProdutoItem = ({ produto, onPress, onLongPress }: ProdutoItemProps) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} onLongPress={onLongPress}>
       <Surface style={produtoItemStyles.container}>
         <Image source={{ uri: produto.imagem }} style={produtoItemStyles.image}></Image>
         <Text style={produtoItemStyles.title}>{produto.nome}</Text>

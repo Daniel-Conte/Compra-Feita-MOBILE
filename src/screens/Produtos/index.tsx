@@ -2,11 +2,19 @@ import { ScrollView, View } from 'react-native';
 
 import useProdutos from './useProdutos';
 import ProdutoItem from './ProdutoItem';
+import ProdutoOptions from './ProdutoOptions';
 import produtosStyles from './styles';
 import type { ProdutosProps } from './types';
 
 const Produtos = ({}: ProdutosProps) => {
-  const { produtosList, onPressProdutoItem } = useProdutos();
+  const {
+    produtosList,
+    onPressItem,
+    produtoOptions,
+    onDismissDialog,
+    onLongPressItem,
+    produtoSelecionado,
+  } = useProdutos();
 
   return (
     <ScrollView>
@@ -15,10 +23,17 @@ const Produtos = ({}: ProdutosProps) => {
           <ProdutoItem
             key={produto.nome}
             produto={produto}
-            onPress={() => onPressProdutoItem(produto)}
+            onPress={() => onPressItem(produto)}
+            onLongPress={() => onLongPressItem(produto)}
           />
         ))}
       </View>
+
+      <ProdutoOptions
+        visible={!!produtoSelecionado}
+        produtoOptions={produtoOptions}
+        onDismiss={onDismissDialog}
+      />
     </ScrollView>
   );
 };

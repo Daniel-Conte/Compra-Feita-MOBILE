@@ -61,7 +61,7 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 export type ProdutosStackParamList = {
   ProdutosList: undefined;
   ProdutoDetails: { codigoProduto: number };
-  ProdutoForm: { mode: 'new' };
+  ProdutoForm: { mode: 'new' } | { mode: 'edit'; codigoProduto: number };
 };
 
 export type ProdutosStackScreenProps<Screen extends keyof ProdutosStackParamList> =

@@ -8,7 +8,7 @@ import Select from '@components/Select';
 import ImagePicker from '@components/ImagePicker';
 import { currencyFieldMask } from '@components/Form/masks/currency';
 import { numberMask } from '@components/Form/masks/number';
-import { decimalMask } from '@components/Form/masks/decimal';
+import { decimalFieldMask } from '@components/Form/masks/decimal';
 import useProdutoForm from './useProdutoForm';
 import schema from './schema';
 import styles from './styles';
@@ -16,7 +16,7 @@ import styles from './styles';
 const ProdutoForm = () => {
   const { onSubmit, initialValues, mode, categoriasList } = useProdutoForm();
 
-  //if (mode === 'edit' && !initialValues) return null;
+  if (mode === 'edit' && !initialValues) return null;
 
   return (
     <HideKeyboardOnTouchOutside>
@@ -79,7 +79,7 @@ const ProdutoForm = () => {
                       label="Altura"
                       placeholder="Digite a altura"
                       keyboardType="number-pad"
-                      mask={decimalMask}
+                      mask={decimalFieldMask}
                       style={styles.field}
                     />
                   </View>
@@ -89,7 +89,7 @@ const ProdutoForm = () => {
                       label="Largura"
                       placeholder="Digite a largura"
                       keyboardType="number-pad"
-                      mask={decimalMask}
+                      mask={decimalFieldMask}
                       style={styles.field}
                     />
                   </View>
@@ -99,7 +99,7 @@ const ProdutoForm = () => {
                   label="Comprimento"
                   placeholder="Digite o comprimento"
                   keyboardType="number-pad"
-                  mask={decimalMask}
+                  mask={decimalFieldMask}
                   style={styles.field}
                 />
 
