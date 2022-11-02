@@ -32,7 +32,7 @@ const ProdutosNavigator = () => {
         }}
       />
 
-      {user?.admin && (
+      {!!user?.admin && (
         <Stack.Screen
           name="ProdutoForm"
           component={ProdutoForm}
