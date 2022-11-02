@@ -12,6 +12,7 @@ import type { ProdutoOption } from './ProdutoOptions/types';
 const useProdutos = () => {
   const navigation = useNavigation<ProdutosScreenNavigationProp>();
   const toggleSnackbar = useAppStore(state => state.toggleSnackbar);
+  const toggleLoading = useAppStore(state => state.toggleLoading);
   const user = useUserStore(state => state.user);
   const [produtosList, _setProdutosList] = useState<ProdutoListItem[]>([]);
   const [produtoSelecionado, _setProdutoSelecionado] = useState<ProdutoListItem | null>(null);
@@ -54,15 +55,15 @@ const useProdutos = () => {
   };
 
   const onDelete = async () => {
-    /* try {
-      if (!produtoSelecionado) throw 'Ocorreu um erro ao excluir o endereço';
+    try {
+      if (!produtoSelecionado) throw 'Ocorreu um erro ao excluir o produto';
 
       toggleLoading(true);
       const res = await produtoApi.delete(produtoSelecionado.codigo);
 
       if (res?.data?.message) toggleSnackbar({ title: res.data?.message, variant: 'success' });
 
-      _getProdutos();
+      _getProdutosList();
     } catch (error) {
       const message = parseError(error);
 
@@ -71,7 +72,7 @@ const useProdutos = () => {
       toggleLoading(false);
 
       onDismissDialog();
-    } */
+    }
   };
 
   const produtoOptions: ProdutoOption[] = [
