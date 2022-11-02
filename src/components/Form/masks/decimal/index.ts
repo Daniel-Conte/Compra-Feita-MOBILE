@@ -1,11 +1,10 @@
 import { numberMask } from '../number';
 import type { Mask } from '../types';
 
-export const decimalMask: Mask<string> = value => {
-  let newValue: string | number = String(value).replace(/\D/g, '');
-  if (!newValue) return newValue;
+const mask: Mask<string> = value => {
+  if (!value) return value;
+  let newValue: string | number = value;
 
-  newValue = parseFloat(newValue) / 100;
   newValue = String(newValue).replace('.', ',');
 
   if (String(newValue).length > 6) {
@@ -17,6 +16,23 @@ export const decimalMask: Mask<string> = value => {
   }
 
   return String(newValue);
+};
+
+export const decimalMask: Mask<number | undefined, string | undefined> = value => {
+  if (!value) return undefined;
+
+  return mask(value.toFixed(2));
+};
+
+export const decimalFieldMask: Mask<string | number, string> = value => {
+  if (!value) return String(value);
+  let newValue: string | number = String(value);
+
+  newValue = newValue.replace(/\D/g, '');
+  if (!newValue) return newValue;
+  newValue = parseFloat(newValue) / 100;
+
+  return mask(String(newValue));
 };
 
 export const decimalUnMask: Mask<string | number, number | undefined> = value => {
