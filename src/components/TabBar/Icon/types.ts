@@ -4,5 +4,4 @@ export interface TabBarIconProps {
   name: React.ComponentProps<typeof FontAwesome>['name'];
   focused: boolean;
   color: string;
-  badge?: number;
 }

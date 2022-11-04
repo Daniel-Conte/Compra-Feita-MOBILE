@@ -47,8 +47,9 @@ const BottomTabNavigator = () => {
         options={{
           title: 'Carrinho de compras',
           tabBarLabel: getTabBarLabel('Carrinho'),
-          tabBarIcon: getTabBarIcon('shopping-cart', quantidadeCarrinho),
+          tabBarIcon: getTabBarIcon('shopping-cart'),
           tabBarButton: getTabBarButton,
+          tabBarBadge: quantidadeCarrinho || undefined,
         }}
       />
 
@@ -74,14 +75,11 @@ const getTabBarLabel = (label: string) => {
   );
 };
 
-const getTabBarIcon = (
-  icon: React.ComponentProps<typeof FontAwesome>['name'],
-  badge: number = 0,
-) => {
+const getTabBarIcon = (icon: React.ComponentProps<typeof FontAwesome>['name']) => {
   type TabBarIconParams = { focused: boolean; color: string; size: number };
 
   return ({ color, focused }: TabBarIconParams) => (
-    <TabBar.Icon name={icon} color={color} focused={focused} badge={badge} />
+    <TabBar.Icon name={icon} color={color} focused={focused} />
   );
 };
 
