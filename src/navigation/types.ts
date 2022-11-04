@@ -95,6 +95,7 @@ export type PedidosStackScreenProps<Screen extends keyof PedidosStackParamList> 
 export type CarrinhoStackParamList = {
   CarrinhoList: undefined;
   NotLoggedIn: undefined;
+  EmptyState: undefined;
 };
 
 export type CarrinhoStackScreenProps<Screen extends keyof CarrinhoStackParamList> =

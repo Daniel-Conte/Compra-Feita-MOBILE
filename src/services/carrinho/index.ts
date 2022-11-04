@@ -22,7 +22,7 @@ const carrinhoApi = {
   },
   async updateQuantidade(payload: UpdateQuantidadeCarrinhoItemRequest) {
     const res: UpdateQuantidadeCarrinhoItemResponse = await axios.put(
-      carrinhoEndpoints.carrinho,
+      carrinhoEndpoints.alterarQuantidade,
       payload,
     );
 
