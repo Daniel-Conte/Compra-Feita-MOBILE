@@ -5,6 +5,7 @@ import authApi from '@services/auth';
 import { AUTH_TOKEN_KEY } from '@config/Constants';
 import useAppStore from '@store/App';
 import useUserStore from '@store/User';
+import useCarrinhoStore from '@store/Carrinho';
 import type { User } from '@store/User/types';
 import parseError from '@utils/parseError';
 import type { LoginFormValues } from './types';
@@ -13,6 +14,7 @@ const useLogin = (goBack: () => void) => {
   const toggleLoading = useAppStore(state => state.toggleLoading);
   const toggleSnackbar = useAppStore(state => state.toggleSnackbar);
   const setUser = useUserStore(state => state.setUser);
+  const getQuantidadeCarrinho = useCarrinhoStore(state => state.getQuantidade);
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
@@ -24,6 +26,7 @@ const useLogin = (goBack: () => void) => {
       const user = jwtDecode<User>(resp.data);
       setUser(user);
       await SecureStore.setItemAsync(AUTH_TOKEN_KEY, resp.data);
+      await getQuantidadeCarrinho();
 
       goBack();
     } catch (error) {

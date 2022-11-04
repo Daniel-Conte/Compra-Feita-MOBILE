@@ -5,6 +5,7 @@ import produtoApi from '@services/produto';
 import carrinhoApi from '@services/carrinho';
 import useUserStore from '@store/User';
 import useAppStore from '@store/App';
+import useCarrinhoStore from '@store/Carrinho';
 import parseError from '@utils/parseError';
 import type { ProdutosScreenNavigationProp, ProdutosScreenRouteProp } from '@navigation/types';
 import type { Produto } from '@services/produto/types';
@@ -16,6 +17,7 @@ const useProdutoDetails = () => {
   const user = useUserStore(state => state.user);
   const toggleSnackbar = useAppStore(state => state.toggleSnackbar);
   const toggleLoading = useAppStore(state => state.toggleLoading);
+  const increaseQuantidadeCarrinho = useCarrinhoStore(state => state.increaseQuantidade);
   const [produto, _setProduto] = useState<Produto | null>(null);
   const [menuQtd, _setMenuQtd] = useState<MenuQtd>({ visible: false, qtd: 1 });
 
@@ -58,6 +60,7 @@ const useProdutoDetails = () => {
 
       toggleLoading(true);
       const res = await carrinhoApi.insert({ codigoProduto: prod.codigo, quantidade: menuQtd.qtd });
+      increaseQuantidadeCarrinho();
 
       if (res?.data?.message) toggleSnackbar({ title: res.data.message, variant: 'success' });
     } catch (error) {

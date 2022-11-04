@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import { AUTH_TOKEN_KEY } from '@config/Constants';
 import authApi from '@services/auth';
 import useUserStore from '@store/User';
+import useCarrinhoStore from '@store/Carrinho';
 import type { User } from '@store/User/types';
 
 const useFirstLoad = () => {
@@ -14,9 +15,12 @@ const useFirstLoad = () => {
   useEffect(() => {
     const firstLoad = async () => {
       try {
-        const promises = [fetchStoredUser()];
+        const isLogged = await fetchStoredUser();
 
-        await Promise.all(promises);
+        if (isLogged) {
+          const promisesWithAuth = [fetchQuantidadeCarrinho()];
+          await Promise.all(promisesWithAuth);
+        }
       } catch (error) {
         console.error(error);
       } finally {
@@ -44,10 +48,17 @@ const fetchStoredUser = async () => {
       await authApi.validateToken(token);
 
       useUserStore.getState().setUser(user);
+
+      return true;
     }
+
+    return false;
   } catch (error) {
     await SecureStore.deleteItemAsync(AUTH_TOKEN_KEY);
+    return false;
   }
 };
+
+const fetchQuantidadeCarrinho = async () => useCarrinhoStore.getState().getQuantidade();
 
 export default useFirstLoad;

@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import usuariosApi from '@services/usuarios';
 import useAppStore from '@store/App';
 import useUserStore from '@store/User';
+import useCarrinhoStore from '@store/Carrinho';
 import { AUTH_TOKEN_KEY } from '@config/Constants';
 import { phoneMask } from '@components/Form/masks/phone';
 import parseError from '@utils/parseError';
@@ -15,6 +16,7 @@ const usePerfil = () => {
   const _toggleSnackbar = useAppStore(state => state.toggleSnackbar);
   const _user = useUserStore(state => state.user);
   const _setUser = useUserStore(state => state.setUser);
+  const _setQuantidadeCarrinho = useCarrinhoStore(state => state.setQuantidade);
   const { navigate } = useNavigation();
 
   const initialValues: Partial<UserEditFormValues> = {
@@ -52,6 +54,7 @@ const usePerfil = () => {
 
     await SecureStore.deleteItemAsync(AUTH_TOKEN_KEY);
     _setUser(null);
+    _setQuantidadeCarrinho(0);
   };
 
   return { onSubmit, initialValues, onLogout };

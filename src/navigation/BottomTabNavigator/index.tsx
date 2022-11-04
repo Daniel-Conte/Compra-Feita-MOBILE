@@ -5,6 +5,7 @@ import type {
   LabelPosition,
 } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 
+import useCarrinhoStore from '@store/Carrinho';
 import ProdutosNavigator from './ProdutosNavigator';
 import PedidosNavigator from './PedidosNavigator';
 import CarrinhoNavigator from './CarrinhoNavigator';
@@ -15,6 +16,8 @@ import type { RootTabParamList } from '../types';
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 const BottomTabNavigator = () => {
+  const quantidadeCarrinho = useCarrinhoStore(state => state.quantidade);
+
   return (
     <BottomTab.Navigator initialRouteName="Produtos">
       <BottomTab.Screen
@@ -42,8 +45,9 @@ const BottomTabNavigator = () => {
         name="Carrinho"
         component={CarrinhoNavigator}
         options={{
+          title: 'Carrinho de compras',
           tabBarLabel: getTabBarLabel('Carrinho'),
-          tabBarIcon: getTabBarIcon('shopping-cart'),
+          tabBarIcon: getTabBarIcon('shopping-cart', quantidadeCarrinho),
           tabBarButton: getTabBarButton,
         }}
       />
@@ -70,11 +74,14 @@ const getTabBarLabel = (label: string) => {
   );
 };
 
-const getTabBarIcon = (icon: React.ComponentProps<typeof FontAwesome>['name']) => {
+const getTabBarIcon = (
+  icon: React.ComponentProps<typeof FontAwesome>['name'],
+  badge: number = 0,
+) => {
   type TabBarIconParams = { focused: boolean; color: string; size: number };
 
   return ({ color, focused }: TabBarIconParams) => (
-    <TabBar.Icon name={icon} color={color} focused={focused} />
+    <TabBar.Icon name={icon} color={color} focused={focused} badge={badge} />
   );
 };
 
