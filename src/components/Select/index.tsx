@@ -40,11 +40,14 @@ const Select = ({
                     ref={ref}
                     error={!!error}
                   />
-                  {value?.title && (
-                    <Subheading style={{ position: 'absolute', top: 27, left: 12 }}>
-                      {value.title}
-                    </Subheading>
-                  )}
+                  {value?.title &&
+                    (typeof value.title === 'string' ? (
+                      <Subheading style={{ position: 'absolute', top: 27, left: 12 }}>
+                        {value.title}
+                      </Subheading>
+                    ) : (
+                      value.title
+                    ))}
 
                   {error && <ErrorMessage>{error.message}</ErrorMessage>}
                 </View>
