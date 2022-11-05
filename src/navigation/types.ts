@@ -19,6 +19,7 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Auth: NavigatorScreenParams<AuthStackParamList> | undefined;
+  Pedido: NavigatorScreenParams<PedidoStackParamList> | undefined;
   NotFound: undefined;
 };
 
@@ -45,6 +46,19 @@ export type RootTabScreenNavigationProps<Screen extends keyof RootTabParamList> 
     NativeStackNavigationProp<RootStackParamList>,
     BottomTabNavigationProp<RootTabParamList, Screen>
   >;
+
+// Pedido
+export type PedidoStackParamList = {
+  PedidoCreate: undefined;
+};
+
+export type PedidoStackScreenProps<Screen extends keyof PedidoStackParamList> =
+  NativeStackScreenProps<PedidoStackParamList, Screen>;
+
+export type PedidoScreenNavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<PedidoStackParamList>,
+  NativeStackNavigationProp<RootStackParamList>
+>;
 
 // Auth
 export type AuthStackParamList = {
@@ -81,7 +95,6 @@ export type ProdutosScreenRouteProp<Screen extends keyof ProdutosStackParamList>
 // Pedidos
 export type PedidosStackParamList = {
   PedidosList: undefined;
-  PedidoCreate: { idProdutos: number[] };
   NotLoggedIn: undefined;
 };
 
@@ -103,6 +116,11 @@ export type CarrinhoStackScreenProps<Screen extends keyof CarrinhoStackParamList
     NativeStackScreenProps<CarrinhoStackParamList, Screen>,
     RootTabScreenProps<'Carrinho'>
   >;
+
+export type CarrinhoScreenNavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<CarrinhoStackParamList>,
+  RootTabScreenNavigationProps<'Carrinho'>
+>;
 
 // Perfil
 export type PerfilStackParamList = {

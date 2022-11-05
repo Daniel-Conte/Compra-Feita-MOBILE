@@ -1,13 +1,15 @@
 import { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import useAppStore from '@store/App';
 import useCarrinhoStore from '@store/Carrinho';
 import carrinhoApi from '@services/carrinho';
 import parseError from '@utils/parseError';
 import type { CarrinhoListItem } from '@services/carrinho/types';
+import type { CarrinhoScreenNavigationProp } from '@navigation/types';
 
 const useCarrinho = () => {
+  const navigation = useNavigation<CarrinhoScreenNavigationProp>();
   const toggleSnackbar = useAppStore(state => state.toggleSnackbar);
   const decreaseQuantidadeCarrinho = useCarrinhoStore(state => state.decreaseQuantidade);
   const [carrinhoList, _setCarrinhoList] = useState<CarrinhoListItem[]>([]);
@@ -30,7 +32,9 @@ const useCarrinho = () => {
     }
   };
 
-  const onCreatePedido = () => {};
+  const onCreatePedido = () => {
+    navigation.navigate('Pedido', { screen: 'PedidoCreate' });
+  };
 
   const onRemoveItem = async (codigo: number) => {
     try {
