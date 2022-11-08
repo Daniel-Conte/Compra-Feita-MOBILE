@@ -29,10 +29,11 @@ export const decimalFieldMask: Mask<string | number, string> = value => {
   let newValue: string | number = String(value);
 
   newValue = newValue.replace(/\D/g, '');
-  if (!newValue) return newValue;
+  if (!Number(newValue)) return Number(newValue).toString();
   newValue = parseFloat(newValue) / 100;
+  newValue = newValue.toFixed(2);
 
-  return mask(String(newValue));
+  return mask(newValue);
 };
 
 export const decimalUnMask: Mask<string | number, number | undefined> = value => {
