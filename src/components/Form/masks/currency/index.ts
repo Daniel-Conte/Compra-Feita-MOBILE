@@ -3,7 +3,7 @@ import type { Mask } from '../types';
 
 const mask: Mask<string | number, string> = value => {
   if (value === null || value === undefined) return value;
-  if (!value) return 'R$ 0,00';
+  if (!Number(value)) return 'R$ 0,00';
   let newValue: string | number = String(value);
 
   newValue = String(newValue).replace('.', ',');
@@ -26,6 +26,7 @@ export const currencyFieldMask: Mask<string | number, string> = value => {
 
   newValue = newValue.replace(/\D/g, '');
   newValue = parseFloat(newValue) / 100;
+  newValue = newValue.toFixed(2);
 
   return mask(newValue);
 };
