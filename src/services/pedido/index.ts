@@ -13,6 +13,11 @@ const pedidoApi = {
 
     return res;
   },
+  async getUserList() {
+    const res: GetPedidoListResponse = await axios.get(pedidoEndpoints.pedidoUsuario);
+
+    return res;
+  },
   async get(codigo: number) {
     const res: GetPedidoResponse = await axios.get(`${pedidoEndpoints.pedido}/${codigo}`);
 
