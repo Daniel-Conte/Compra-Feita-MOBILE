@@ -9,6 +9,7 @@ import useCarrinhoStore from '@store/Carrinho';
 import parseError from '@utils/parseError';
 import type { CarrinhoListItem } from '@services/carrinho/types';
 import type { Endereco } from '@services/endereco/types';
+import type { PedidoMetodoPagamento } from '@services/pedido/types';
 import type { SelectItem } from '@components/Select/types';
 import type { PedidoScreenNavigationProp } from '@navigation/types';
 import type { PedidoCreateFormValues } from './types';
@@ -58,7 +59,7 @@ const usePedidoCreate = () => {
       toggleLoading(true);
       const resp = await pedidoApi.insert({
         enderecoCodigo: data.enderecoCodigo,
-        metodoPagamento: data.metodoPagamento,
+        metodoPagamento: data.metodoPagamento as PedidoMetodoPagamento,
         itens: pedidoItensList.map(item => item.codigo),
         pagamentoDinheiro: data.metodoPagamento === 2 ? data.pagamentoDinheiro : undefined,
       });
