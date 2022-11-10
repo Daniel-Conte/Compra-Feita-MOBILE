@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import useUserStore from '@store/User';
-import PedidosList from '@screens/Pedidos/List';
+import PedidosList from '@screens/Pedidos';
 import PedidosNotLoggedIn from '@screens/Pedidos/NotLoggedIn';
 import globalStyles from '../globalStyles';
 import type { PedidosStackParamList } from '../types';
