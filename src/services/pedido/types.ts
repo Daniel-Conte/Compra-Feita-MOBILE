@@ -10,9 +10,10 @@ export type Pedido = {
   data: string;
   status: PedidoStatus;
   justificativaCancelamento?: string;
+  valorTotal: number;
   atualizadoEm: Date;
-  pessoa: Pick<Usuario, 'codigo' | 'nome'>;
-  endereco: Pick<Endereco, 'codigo' | 'rua' | 'numero' | 'bairro' | 'cidade'>;
+  pessoa: Pick<Usuario, 'codigo' | 'nome' | 'email' | 'telefone'>;
+  endereco: Pick<Endereco, 'rua' | 'numero' | 'bairro' | 'cidade' | 'complemento'>;
   itensPedido: CarrinhoListItem[];
 };
 
@@ -28,9 +29,7 @@ export type PedidoStatus = 0 | 1 | 2 | 3 | 4 | 5;
 // 2 -> Dinheiro
 export type PedidoMetodoPagamento = 1 | 2;
 
-export type PedidosListItem = Pick<Pedido, 'codigo' | 'status' | 'data'> & {
-  valorTotal: number;
-};
+export type PedidosListItem = Pick<Pedido, 'codigo' | 'status' | 'data' | 'valorTotal'>;
 
 export type GetPedidoListResponse = ApiResponse<PedidosListItem[]>;
 

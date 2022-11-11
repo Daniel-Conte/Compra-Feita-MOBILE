@@ -9,7 +9,7 @@ export type Endereco = {
   bairro: string;
   rua: string;
   numero: string;
-  complemento: string | null;
+  complemento?: string;
   criadoEm: Date;
   atualizadoEm: Date;
   codigoPessoa: number;

@@ -1,13 +1,15 @@
 import { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import useAppStore from '@store/App';
 import useUserStore from '@store/User';
 import pedidosApi from '@services/pedido';
 import parseError from '@utils/parseError';
 import type { PedidosListItem } from '@services/pedido/types';
+import type { PedidosScreenNavigationProp } from '@navigation/types';
 
 const usePedidos = () => {
+  const navigation = useNavigation<PedidosScreenNavigationProp>();
   const user = useUserStore(state => state.user);
   const toggleSnackbar = useAppStore(state => state.toggleSnackbar);
   const [pedidosList, _setPedidosList] = useState<PedidosListItem[]>([]);
@@ -33,7 +35,11 @@ const usePedidos = () => {
     }
   };
 
-  return { pedidosList };
+  const onPressItem = (pedido: PedidosListItem) => {
+    navigation.push('PedidoDetails', { codigoPedido: pedido.codigo });
+  };
+
+  return { pedidosList, onPressItem };
 };
 
 export default usePedidos;

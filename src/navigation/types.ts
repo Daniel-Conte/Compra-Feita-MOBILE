@@ -95,6 +95,7 @@ export type ProdutosScreenRouteProp<Screen extends keyof ProdutosStackParamList>
 // Pedidos
 export type PedidosStackParamList = {
   PedidosList: undefined;
+  PedidoDetails: { codigoPedido: number };
   NotLoggedIn: undefined;
 };
 
@@ -103,6 +104,14 @@ export type PedidosStackScreenProps<Screen extends keyof PedidosStackParamList> 
     NativeStackScreenProps<PedidosStackParamList, Screen>,
     RootTabScreenProps<'Pedidos'>
   >;
+
+export type PedidosScreenNavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<PedidosStackParamList>,
+  RootTabScreenNavigationProps<'Pedidos'>
+>;
+
+export type PedidosScreenRouteProp<Screen extends keyof PedidosStackParamList> =
+  PedidosStackScreenProps<Screen>['route'];
 
 // Carrinho de compras
 export type CarrinhoStackParamList = {

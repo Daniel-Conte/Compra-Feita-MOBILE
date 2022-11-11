@@ -5,13 +5,13 @@ import PedidosItem from './PedidosItem';
 import type { PedidosListProps } from './types';
 
 const PedidosList = ({}: PedidosListProps) => {
-  const { pedidosList } = usePedidos();
+  const { pedidosList, onPressItem } = usePedidos();
 
   return (
     <View>
       <FlatList
         data={pedidosList.map(pedido => ({ key: pedido.codigo, pedido }))}
-        renderItem={({ item }) => <PedidosItem pedido={item.pedido} />}
+        renderItem={({ item }) => <PedidosItem pedido={item.pedido} onPress={onPressItem} />}
       />
     </View>
   );

@@ -10,16 +10,7 @@ const usePedidosItem = (item: PedidosListItem) => {
     return `${day}/${month}/${year}`;
   };
 
-  const statusPedido = {
-    0: 'Aguardando',
-    1: 'Confirmado',
-    2: 'Negado',
-    3: 'Cancelado',
-    4: 'Em preparação',
-    5: 'Finalizado',
-  };
-
-  return { statusPedido, getDate };
+  return { getDate };
 };
 
 export default usePedidosItem;

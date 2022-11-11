@@ -38,6 +38,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: getTabBarLabel('Pedidos'),
           tabBarIcon: getTabBarIcon('list-alt'),
           tabBarButton: getTabBarButton,
+          headerShown: false,
         }}
       />
 

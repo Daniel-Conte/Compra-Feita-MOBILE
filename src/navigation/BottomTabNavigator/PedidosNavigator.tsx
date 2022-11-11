@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import useUserStore from '@store/User';
 import PedidosList from '@screens/Pedidos';
+import PedidoDetails from '@screens/Pedidos/PedidoDetails';
 import PedidosNotLoggedIn from '@screens/Pedidos/NotLoggedIn';
 import globalStyles from '../globalStyles';
 import type { PedidosStackParamList } from '../types';
@@ -15,17 +16,18 @@ const PedidosNavigator = () => {
     <Stack.Navigator screenOptions={{ contentStyle: globalStyles.container }}>
       {isLoggedIn ? (
         <>
+          <Stack.Screen name="PedidosList" component={PedidosList} options={{ title: 'Pedidos' }} />
           <Stack.Screen
-            name="PedidosList"
-            component={PedidosList}
-            options={{ headerShown: false }}
+            name="PedidoDetails"
+            component={PedidoDetails}
+            options={{ title: 'Detalhes do pedido' }}
           />
         </>
       ) : (
         <Stack.Screen
           name="NotLoggedIn"
           component={PedidosNotLoggedIn}
-          options={{ headerShown: false }}
+          options={{ title: 'Pedidos' }}
         />
       )}
     </Stack.Navigator>
