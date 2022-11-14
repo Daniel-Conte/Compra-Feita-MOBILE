@@ -41,3 +41,13 @@ export type InsertPedidoRequest = Pick<Pedido, 'metodoPagamento' | 'pagamentoDin
 };
 
 export type InsertPedidoResponse = ApiResponse<MessageResponse>;
+
+export type CancelarPedidoResponse = ApiResponse<MessageResponse>;
+
+export type ConfirmarPedidoResponse = ApiResponse<MessageResponse>;
+
+export type FinalizarPedidoResponse = ApiResponse<MessageResponse>;
+
+export type IniciarPedidoResponse = ApiResponse<MessageResponse>;
+
+export type NegarPedidoResponse = ApiResponse<MessageResponse>;
