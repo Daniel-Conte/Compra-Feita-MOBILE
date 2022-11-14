@@ -6,7 +6,7 @@ import usuariosApi from '@services/usuarios';
 import useAppStore from '@store/App';
 import useUserStore from '@store/User';
 import useCarrinhoStore from '@store/Carrinho';
-import { AUTH_TOKEN_KEY } from '@config/Constants';
+import { AUTH_TOKEN_KEY } from '@constants/index';
 import { phoneMask } from '@components/Form/masks/phone';
 import parseError from '@utils/parseError';
 import type { UserEditFormValues } from './types';

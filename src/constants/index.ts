@@ -1,3 +1,5 @@
+export const AUTH_TOKEN_KEY = 'Auth_Token';
+
 export const STATUS_PEDIDO = {
   0: 'Aguardando',
   1: 'Confirmado',

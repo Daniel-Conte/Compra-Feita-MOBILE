@@ -3,7 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as SecureStore from 'expo-secure-store';
 import jwtDecode from 'jwt-decode';
 
-import { AUTH_TOKEN_KEY } from '@config/Constants';
+import { AUTH_TOKEN_KEY } from '@constants/index';
 import authApi from '@services/auth';
 import useUserStore from '@store/User';
 import useCarrinhoStore from '@store/Carrinho';

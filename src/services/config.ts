@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
 import { REACT_APP_BASE_URL } from '@env';
-import { AUTH_TOKEN_KEY } from '@config/Constants';
+import { AUTH_TOKEN_KEY } from '@constants/index';
 import useUserStore from '@store/User';
 
 const instance = axios.create({
