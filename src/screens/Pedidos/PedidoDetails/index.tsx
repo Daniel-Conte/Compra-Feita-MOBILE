@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Caption, Headline, Text, Title } from 'react-native-paper';
+import { Caption, FAB, Headline, Portal, Text, Title } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
 
 import { currencyMask } from '@components/Form/masks/currency';
 import { phoneMask } from '@components/Form/masks/phone';
@@ -9,7 +11,9 @@ import styles from './styles';
 import type { PedidoDetailsProps } from './types';
 
 const PedidoDetails = ({}: PedidoDetailsProps) => {
-  const { pedido, getEndereco, user } = usePedidoDetails();
+  const [fabOpen, setFabOpen] = useState(false);
+  const _isFocused = useIsFocused();
+  const { pedido, getEndereco, user, getFABActions } = usePedidoDetails();
 
   if (!pedido) return null;
 
@@ -76,6 +80,17 @@ const PedidoDetails = ({}: PedidoDetailsProps) => {
           </View>
         </View>
       )}
+
+      <Portal>
+        <FAB.Group
+          open={fabOpen}
+          icon="th-list"
+          visible={!!user?.admin && _isFocused && [0, 1, 4].includes(pedido.status)}
+          actions={getFABActions()}
+          onStateChange={({ open }) => setFabOpen(open)}
+          style={styles.fab}
+        />
+      </Portal>
     </ScrollView>
   );
 };

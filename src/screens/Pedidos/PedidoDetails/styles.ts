@@ -76,7 +76,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#fff',
-    marginVertical: 20,
+    marginTop: 20,
+    marginBottom: 75,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
@@ -86,5 +87,8 @@ export default StyleSheet.create({
   customerValue: {
     alignSelf: 'flex-end',
     fontSize: 17,
+  },
+  fab: {
+    bottom: 50,
   },
 });

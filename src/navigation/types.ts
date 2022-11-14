@@ -96,6 +96,7 @@ export type ProdutosScreenRouteProp<Screen extends keyof ProdutosStackParamList>
 export type PedidosStackParamList = {
   PedidosList: undefined;
   PedidoDetails: { codigoPedido: number };
+  PedidoCancelarNegar: { codigoPedido: number; mode: 'Cancelar' | 'Negar' };
   NotLoggedIn: undefined;
 };
 
