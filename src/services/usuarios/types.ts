@@ -7,6 +7,7 @@ export type Usuario = {
   senha: string;
   telefone: string;
   admin: number;
+  pushToken?: string;
   criadoEm: Date;
   atualizadoEm: Date;
 };
@@ -16,3 +17,5 @@ export type UpdateUsuarioRequest = Pick<Usuario, 'codigo' | 'nome' | 'email' | '
 };
 
 export type UpdateUsuarioResponse = ApiResponse<MessageTokenResponse>;
+
+export type UpdateUsuarioPushTokenResponse = ApiResponse<MessageTokenResponse>;
