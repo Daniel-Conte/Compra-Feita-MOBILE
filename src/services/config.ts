@@ -1,12 +1,12 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
-import { REACT_APP_BASE_URL } from '@env';
+import { apiUrl } from '@config/index';
 import { AUTH_TOKEN_KEY } from '@constants/index';
 import useUserStore from '@store/User';
 
 const instance = axios.create({
-  baseURL: REACT_APP_BASE_URL,
+  baseURL: apiUrl,
   headers: { 'Content-type': 'application/json' },
 });
 
