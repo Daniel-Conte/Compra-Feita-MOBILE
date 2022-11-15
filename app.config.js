@@ -33,6 +33,15 @@ export default {
     web: {
       favicon: './assets/images/favicon.png',
     },
+    plugins: [
+      [
+        'expo-notifications',
+        {
+          icon: './assets/images/icon.png',
+          color: '#ffffff',
+        },
+      ],
+    ],
     extra: {
       eas: {
         projectId: '0aef3975-becf-4eeb-ae9b-75a54766bf3e',
