@@ -43,9 +43,10 @@ const useLogin = (goBack: () => void) => {
 
   const savePushToken = async () => {
     const user = useUserStore.getState().user;
-    const token = await registerForPushNotifications();
 
     try {
+      const token = await registerForPushNotifications();
+
       if ((token || null) !== user?.pushToken) await usuariosApi.updatePushToken(token);
     } catch (error) {}
   };
