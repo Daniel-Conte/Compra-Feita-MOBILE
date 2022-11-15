@@ -10,6 +10,7 @@ export type User = {
   email: string;
   telefone: string;
   admin: number;
+  pushToken?: string;
   criadoEm: Date | null;
   atualizadoEm: Date | null;
   iat: number;

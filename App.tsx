@@ -5,7 +5,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { FontAwesome } from '@expo/vector-icons';
 
-import useConfigPushNotifications from '@hooks/useConfigPushNotifications';
 import useFirstLoad from '@hooks/useFirstLoad';
 import themes from './src/config/Theme';
 import Navigation from './src/navigation';
@@ -24,7 +23,7 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
-  useConfigPushNotifications();
+  //useConfigPushNotifications();
   const { isAppReady, onLayout } = useFirstLoad();
   const loading = useAppStore(state => state.loading);
 
