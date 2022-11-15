@@ -6,7 +6,8 @@ export const STATUS_PEDIDO = {
   2: 'Negado',
   3: 'Cancelado',
   4: 'Em preparação',
-  5: 'Finalizado',
+  5: 'Saiu para entrega',
+  6: 'Finalizado',
 };
 
 export const METODO_PAGAMENTO = {

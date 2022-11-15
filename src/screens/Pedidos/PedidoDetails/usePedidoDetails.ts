@@ -85,6 +85,22 @@ const usePedidoDetails = () => {
     }
   };
 
+  const _entregarPedido = async () => {
+    try {
+      toggleLoading(true);
+      const resp = await pedidoApi.entregar(pedido!.codigo);
+
+      toggleSnackbar({ title: resp.data?.message, variant: 'success' });
+      _fetchPedido();
+    } catch (error) {
+      const message = parseError(error);
+
+      toggleSnackbar({ title: message, variant: 'danger' });
+    } finally {
+      toggleLoading(false);
+    }
+  };
+
   const cancelarPedido = async () => {
     navigation.push('PedidoCancelarNegar', { codigoPedido: pedido!.codigo, mode: 'Cancelar' });
   };
@@ -107,6 +123,11 @@ const usePedidoDetails = () => {
     const negar: FABGroupAction = { icon: 'times', onPress: _negarPedido, label: 'Negar' };
     const cancelar: FABGroupAction = { icon: 'ban', onPress: cancelarPedido, label: 'Cancelar' };
     const iniciar: FABGroupAction = { icon: 'flag', onPress: _iniciarPedido, label: 'Iniciar' };
+    const entregar: FABGroupAction = {
+      icon: 'truck',
+      onPress: _entregarPedido,
+      label: 'Sair para entrega',
+    };
     const confirmar: FABGroupAction = {
       icon: 'check',
       onPress: _confirmarPedido,
@@ -123,8 +144,9 @@ const usePedidoDetails = () => {
       1: [cancelar, finalizar, iniciar],
       2: [],
       3: [],
-      4: [cancelar, finalizar],
-      5: [],
+      4: [cancelar, finalizar, entregar],
+      5: [cancelar, finalizar],
+      6: [],
     };
 
     return statusActions[pedido!.status];

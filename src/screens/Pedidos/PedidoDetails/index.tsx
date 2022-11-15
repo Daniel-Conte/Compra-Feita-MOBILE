@@ -96,7 +96,7 @@ const PedidoDetails = ({}: PedidoDetailsProps) => {
         <FAB.Group
           open={fabOpen}
           icon="th-list"
-          visible={!!user?.admin && _isFocused && [0, 1, 4].includes(pedido.status)}
+          visible={!!user?.admin && _isFocused && [0, 1, 4, 5].includes(pedido.status)}
           actions={getFABActions()}
           onStateChange={({ open }) => setFabOpen(open)}
           style={styles.fab}
