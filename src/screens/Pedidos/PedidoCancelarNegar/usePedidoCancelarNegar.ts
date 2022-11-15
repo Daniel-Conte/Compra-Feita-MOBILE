@@ -35,6 +35,7 @@ const usePedidoCancelarNegar = () => {
           to: route.params.pushToken,
           title: 'Pedido cancelado',
           body: `Motivo: ${justificativa}`,
+          channelId: 'orderStatus',
         });
       }
     } catch (error) {
@@ -59,6 +60,7 @@ const usePedidoCancelarNegar = () => {
           to: route.params.pushToken,
           title: 'Pedido negado',
           body: `Motivo: ${justificativa}`,
+          channelId: 'orderStatus',
         });
       }
     } catch (error) {

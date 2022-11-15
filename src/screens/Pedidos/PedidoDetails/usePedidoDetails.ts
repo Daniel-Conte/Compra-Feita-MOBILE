@@ -51,6 +51,7 @@ const usePedidoDetails = () => {
           to: pedido.pessoa.pushToken,
           title: 'Pedido confirmado',
           body: '',
+          channelId: 'orderStatus',
         });
       }
     } catch (error) {
@@ -75,6 +76,7 @@ const usePedidoDetails = () => {
           to: pedido.pessoa.pushToken,
           title: 'Pedido em preparação',
           body: '',
+          channelId: 'orderStatus',
         });
       }
     } catch (error) {
@@ -115,6 +117,7 @@ const usePedidoDetails = () => {
           to: pedido.pessoa.pushToken,
           title: 'Pedido saiu para entrega',
           body: '',
+          channelId: 'orderStatus',
         });
       }
     } catch (error) {
