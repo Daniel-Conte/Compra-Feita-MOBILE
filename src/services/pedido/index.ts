@@ -3,6 +3,7 @@ import pedidoEndpoints from './endpoints';
 import type {
   CancelarPedidoResponse,
   ConfirmarPedidoResponse,
+  EntregarPedidoResponse,
   FinalizarPedidoResponse,
   GetPedidoListResponse,
   GetPedidoResponse,
@@ -42,6 +43,11 @@ const pedidoApi = {
   },
   async confirmar(codigo: number) {
     const res: ConfirmarPedidoResponse = await axios.put(`${pedidoEndpoints.confirmar}/${codigo}`);
+
+    return res;
+  },
+  async entregar(codigo: number) {
+    const res: EntregarPedidoResponse = await axios.put(`${pedidoEndpoints.entregar}/${codigo}`);
 
     return res;
   },
