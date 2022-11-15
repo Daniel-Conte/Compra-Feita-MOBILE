@@ -91,4 +91,7 @@ export default StyleSheet.create({
   fab: {
     bottom: 50,
   },
+  buttonCancel: {
+    marginTop: 15,
+  },
 });

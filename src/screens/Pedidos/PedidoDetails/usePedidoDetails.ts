@@ -85,7 +85,7 @@ const usePedidoDetails = () => {
     }
   };
 
-  const _cancelarPedido = async () => {
+  const cancelarPedido = async () => {
     navigation.push('PedidoCancelarNegar', { codigoPedido: pedido!.codigo, mode: 'Cancelar' });
   };
 
@@ -105,7 +105,7 @@ const usePedidoDetails = () => {
 
   const getFABActions = (): FABGroupAction[] => {
     const negar: FABGroupAction = { icon: 'times', onPress: _negarPedido, label: 'Negar' };
-    const cancelar: FABGroupAction = { icon: 'ban', onPress: _cancelarPedido, label: 'Cancelar' };
+    const cancelar: FABGroupAction = { icon: 'ban', onPress: cancelarPedido, label: 'Cancelar' };
     const iniciar: FABGroupAction = { icon: 'flag', onPress: _iniciarPedido, label: 'Iniciar' };
     const confirmar: FABGroupAction = {
       icon: 'check',
@@ -135,6 +135,7 @@ const usePedidoDetails = () => {
     getEndereco,
     user,
     getFABActions,
+    cancelarPedido,
   };
 };
 

@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Caption, FAB, Headline, Portal, Text, Title } from 'react-native-paper';
+import { Button, Caption, FAB, Headline, Portal, Text, Title } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 
 import { currencyMask } from '@components/Form/masks/currency';
 import { phoneMask } from '@components/Form/masks/phone';
 import { METODO_PAGAMENTO, STATUS_PEDIDO } from '@constants/index';
+import { colorVariants } from '@config/Theme';
 import usePedidoDetails from './usePedidoDetails';
 import styles from './styles';
 import type { PedidoDetailsProps } from './types';
@@ -13,7 +14,7 @@ import type { PedidoDetailsProps } from './types';
 const PedidoDetails = ({}: PedidoDetailsProps) => {
   const [fabOpen, setFabOpen] = useState(false);
   const _isFocused = useIsFocused();
-  const { pedido, getEndereco, user, getFABActions } = usePedidoDetails();
+  const { pedido, getEndereco, user, getFABActions, cancelarPedido } = usePedidoDetails();
 
   if (!pedido) return null;
 
@@ -79,6 +80,16 @@ const PedidoDetails = ({}: PedidoDetailsProps) => {
             <Text style={styles.customerValue}>{phoneMask(pedido.pessoa.telefone)}</Text>
           </View>
         </View>
+      )}
+
+      {!user?.admin && [0, 1, 4].includes(pedido.status) && (
+        <Button
+          mode="outlined"
+          onPress={cancelarPedido}
+          color={colorVariants.danger}
+          style={styles.buttonCancel}>
+          Cancelar pedido
+        </Button>
       )}
 
       <Portal>
