@@ -12,7 +12,7 @@ export type Pedido = {
   justificativaCancelamento?: string;
   valorTotal: number;
   atualizadoEm: Date;
-  pessoa: Pick<Usuario, 'codigo' | 'nome' | 'email' | 'telefone'>;
+  pessoa: Pick<Usuario, 'codigo' | 'nome' | 'email' | 'telefone' | 'pushToken'>;
   endereco: Pick<Endereco, 'rua' | 'numero' | 'bairro' | 'cidade' | 'complemento'>;
   itensPedido: CarrinhoListItem[];
 };

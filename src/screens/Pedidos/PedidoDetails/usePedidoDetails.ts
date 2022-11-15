@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 
 import pedidoApi from '@services/pedido';
+import pushNotificationsApi from '@services/pushNotifications';
 import useUserStore from '@store/User';
 import useAppStore from '@store/App';
 import parseError from '@utils/parseError';
@@ -44,6 +45,14 @@ const usePedidoDetails = () => {
 
       toggleSnackbar({ title: resp.data?.message, variant: 'success' });
       _fetchPedido();
+
+      if (pedido?.pessoa.pushToken) {
+        pushNotificationsApi.send({
+          to: pedido.pessoa.pushToken,
+          title: 'Pedido confirmado',
+          body: '',
+        });
+      }
     } catch (error) {
       const message = parseError(error);
 
@@ -60,6 +69,14 @@ const usePedidoDetails = () => {
 
       toggleSnackbar({ title: resp.data?.message, variant: 'success' });
       _fetchPedido();
+
+      if (pedido?.pessoa.pushToken) {
+        pushNotificationsApi.send({
+          to: pedido.pessoa.pushToken,
+          title: 'Pedido em preparação',
+          body: '',
+        });
+      }
     } catch (error) {
       const message = parseError(error);
 
@@ -92,6 +109,14 @@ const usePedidoDetails = () => {
 
       toggleSnackbar({ title: resp.data?.message, variant: 'success' });
       _fetchPedido();
+
+      if (pedido?.pessoa.pushToken) {
+        pushNotificationsApi.send({
+          to: pedido.pessoa.pushToken,
+          title: 'Pedido saiu para entrega',
+          body: '',
+        });
+      }
     } catch (error) {
       const message = parseError(error);
 
@@ -102,11 +127,19 @@ const usePedidoDetails = () => {
   };
 
   const cancelarPedido = async () => {
-    navigation.push('PedidoCancelarNegar', { codigoPedido: pedido!.codigo, mode: 'Cancelar' });
+    navigation.push('PedidoCancelarNegar', {
+      codigoPedido: pedido!.codigo,
+      mode: 'Cancelar',
+      pushToken: pedido?.pessoa.pushToken,
+    });
   };
 
   const _negarPedido = async () => {
-    navigation.push('PedidoCancelarNegar', { codigoPedido: pedido!.codigo, mode: 'Negar' });
+    navigation.push('PedidoCancelarNegar', {
+      codigoPedido: pedido!.codigo,
+      mode: 'Negar',
+      pushToken: pedido?.pessoa.pushToken,
+    });
   };
 
   const getEndereco = () => {
