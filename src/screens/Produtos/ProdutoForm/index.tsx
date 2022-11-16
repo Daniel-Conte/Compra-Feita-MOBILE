@@ -30,7 +30,7 @@ const ProdutoForm = () => {
                   buttonText="Selecione as imagens"
                   imageLimit={5}
                   imagePickerOptions={{ allowsMultipleSelection: true }}
-                  resize={{ height: 300 }}
+                  resize={{ height: 500 }}
                 />
 
                 <Field name="nome" label="Nome" placeholder="Digite o nome" style={styles.field} />
